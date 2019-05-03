@@ -4,9 +4,13 @@ eula --agreed
 ignoredisk --only-use=vda
 # System language
 lang en_US.UTF-8
+# Keyboard layouts
+keyboard --vckeymap=fr --xlayouts='fr'
 # Use network installation
-url --mirrorlist="https://mirrors.fedoraproject.org/mirrorlist?repo=fedora-29&arch=aarch64"
-repo --name="M3ulcb-BSP" --baseurl="http://fedora.lorient.iot/iotbzh-repositories/m3ulcb-bsp/" --cost=1 --install
+url --mirrorlist "https://mirrors.fedoraproject.org/mirrorlist?repo=fedora-29&arch=aarch64"
+# Additionnal repositories
+repo --name="m3ulcb-bsp" --baseurl="http://kojihub01.lorient.iot/iotbzh-repositories/m3ulcb-bsp/" --cost=1
+repo --name="m3ulcb-bsp" --baseurl="http://kojihub01.lorient.iot/iotbzh-repositories/m3ulcb-bsp/" --cost=1 --install
 # System authorization information
 auth --useshadow --passalgo=sha512
 # Firewall configuration
@@ -19,23 +23,20 @@ selinux --disabled
 timezone --isUtc Europe/Paris
 # Root password setup
 rootpw Image_is_securized!
+# Do not configure the X Window System
+skipx
+# Poweroff the image once installed
 poweroff
 
 # System services
 services --enabled="sshd,NetworkManager,chronyd,initial-setup"
 # System bootloader configuration
-bootloader --location=mbr
-# Disk partitioning information
-part /boot/efi --asprimary --fstype="vfat" --size=80
-part /boot --asprimary --fstype="ext4" --size=512
-part / --fstype="ext4" --size=1400
+bootloader --location=mbr --boot-drive=vda
+autopart --type=lvm
+# Partition clearing information
+clearpart --none --initlabel
 
 %post
-
-# Setup Raspberry Pi firmware
-cp -P /usr/share/uboot/rpi_2/u-boot.bin /boot/efi/rpi2-u-boot.bin
-cp -P /usr/share/uboot/rpi_3_32b/u-boot.bin /boot/efi/rpi3-u-boot.bin
-
 # work around for poor key import UI in PackageKit
 rm -f /var/lib/rpm/__db*
 releasever=$(rpm -q --qf '%{version}\n' fedora-release)
@@ -86,6 +87,8 @@ glibc-langpack-en
 initial-setup
 iw
 kernel
+kernel-dev
+kernel-modules
 rng-tools
 zram
 -@standard
