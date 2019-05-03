@@ -27,6 +27,8 @@ rootpw Image_is_securized!
 skipx
 # Poweroff the image once installed
 poweroff
+# Do the install
+install
 
 # System services
 services --enabled="sshd,NetworkManager,chronyd,initial-setup"
