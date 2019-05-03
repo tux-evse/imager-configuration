@@ -43,6 +43,8 @@ clearpart --none --initlabel
 rm -f /var/lib/rpm/__db*
 releasever=$(rpm -q --qf '%{version}\n' fedora-release)
 basearch=aarch64
+wget http://kojihub01.lorient.iot/iotbzh-repositories/m3ulcb-bsp/RPM-GPG-KEY-rfor -o /etc/pki/rpm-gpg/RPM-GPG-KEY-rfor
+rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-rfor
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-$releasever-$basearch
 echo "Packages within this ARM disk image"
 rpm -qa
@@ -82,6 +84,7 @@ echo .
 NetworkManager-wifi
 bcm283x-firmware
 chkconfig
+wget
 chrony
 dracut-config-generic
 extlinux-bootloader
