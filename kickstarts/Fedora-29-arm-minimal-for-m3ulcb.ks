@@ -1,3 +1,5 @@
+# Use the text interface not the graphical one
+text
 #version=DEVEL
 eula --agreed
 # Use automatic partioning on vda
