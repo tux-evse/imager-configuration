@@ -34,10 +34,11 @@ install
 # System services
 services --enabled="sshd,NetworkManager,chronyd,initial-setup"
 # System bootloader configuration
+zerombr
 bootloader --location=mbr --boot-drive=vda
-autopart --type=lvm
 # Partition clearing information
 clearpart --none --initlabel
+autopart --nolvm
 
 %post
 # work around for poor key import UI in PackageKit
