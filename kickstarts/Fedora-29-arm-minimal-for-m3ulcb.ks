@@ -9,7 +9,7 @@ lang en_US.UTF-8
 # Keyboard layouts
 keyboard --vckeymap=fr --xlayouts='fr'
 # Use network installation
-url --mirrorlist "https://mirrors.fedoraproject.org/mirrorlist?repo=fedora-29&arch=aarch64"
+#url --mirrorlist "https://mirrors.fedoraproject.org/mirrorlist?repo=fedora-29&arch=aarch64"
 # Additionnal repositories
 repo --name="m3ulcb-bsp" --baseurl="http://kojihub01.lorient.iot/iotbzh-repositories/m3ulcb-bsp/" --cost=1 --install
 # System authorization information
@@ -26,8 +26,8 @@ timezone --isUtc Europe/Paris
 rootpw Image_is_securized!
 # Do not configure the X Window System
 skipx
-# Poweroff the image once installed
-poweroff
+# Reboot the image once installed. ImageFactory look for that!
+reboot
 # Do the install
 install
 
