@@ -11,6 +11,7 @@ keyboard --vckeymap=fr --xlayouts='fr'
 # Use network installation
 #url --mirrorlist "https://mirrors.fedoraproject.org/mirrorlist?repo=fedora-29&arch=aarch64"
 # Additionnal repositories
+repo --name="RedFish" --baseurl="http://iot.bzh/download/public/rpm/AGL-HH/aarch64/" --cost=1 --install
 repo --name="m3ulcb-bsp" --baseurl="http://kojihub01.lorient.iot/iotbzh-repositories/m3ulcb-bsp/" --cost=1 --install
 # System authorization information
 auth --useshadow --passalgo=sha512
@@ -107,7 +108,6 @@ kernel-modules-4.14.75+git0+a5266d2981-r1
 -@standard
 -dracut-config-rescue
 -generic-release*
--glibc-all-langpacks
 -initial-setup-gui
 -iproute-tc
 -ipw*
