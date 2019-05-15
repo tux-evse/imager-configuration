@@ -46,7 +46,7 @@ autopart --nolvm
 rm -f /var/lib/rpm/__db*
 releasever=$(rpm -q --qf '%{version}\n' fedora-release)
 basearch=aarch64
-wget http://kojihub01.lorient.iot/iotbzh-repositories/m3ulcb-bsp/RPM-GPG-KEY-rfor -o /etc/pki/rpm-gpg/RPM-GPG-KEY-rfor
+wget http://kojihub01.lorient.iot/iotbzh-repositories/m3ulcb-bsp/RPM-GPG-KEY-rfor -O /etc/pki/rpm-gpg/RPM-GPG-KEY-rfor
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-rfor
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-$releasever-$basearch
 echo "Packages within this ARM disk image"
