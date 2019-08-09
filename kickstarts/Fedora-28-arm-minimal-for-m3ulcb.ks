@@ -11,7 +11,7 @@ keyboard --vckeymap=fr --xlayouts='fr'
 # Use network installation
 #url --mirrorlist "https://mirrors.fedoraproject.org/mirrorlist?repo=fedora-28&arch=aarch64"
 # Additionnal repositories
-repo --name="RedPesk" --baseurl="http://iot.bzh/download/public/rpm/AGL-HH/aarch64/" --cost=1 --install
+repo --name="RedPesk" --baseurl="http://kojihub.lorient.iot/kojifiles/repos-dist/0_RedPesk_HH-release/latest/aarch64/" --cost=1 --install
 repo --name="m3ulcb-bsp" --baseurl="http://kojihub01.lorient.iot/iotbzh-repositories/m3ulcb-bsp/" --cost=1 --install
 # System authorization information
 auth --useshadow --passalgo=sha512
