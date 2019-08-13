@@ -1,5 +1,5 @@
 # Use the text interface not the graphical one
-text
+# text
 #version=DEVEL
 eula --agreed
 # Use automatic partioning on vda
@@ -46,6 +46,8 @@ autopart --nolvm
 rm -f /var/lib/rpm/__db*
 releasever=$(rpm -q --qf '%{version}\n' fedora-release)
 basearch=aarch64
+wget http://kojihub01.lorient.iot/iotbzh-repositories/m3ulcb-bsp/RPM-GPG-KEY-RedPesk-Bootstrap -O /etc/pki/rpm-gpg/RPM-GPG-KEY-RedPesk-Bootstrap
+rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-RedPesk-Bootstrap
 wget http://kojihub01.lorient.iot/iotbzh-repositories/m3ulcb-bsp/RPM-GPG-KEY-rfor -O /etc/pki/rpm-gpg/RPM-GPG-KEY-rfor
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-rfor
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-$releasever-$basearch
