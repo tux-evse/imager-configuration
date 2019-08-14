@@ -101,7 +101,6 @@ glibc-langpack-en
 initial-setup
 iw
 rng-tools
-zram
 # Yocto BSP kernel
 kernel-4.14.75+git0+a5266d2981-r1
 kernel-dev
