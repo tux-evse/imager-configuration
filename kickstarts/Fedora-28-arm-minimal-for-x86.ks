@@ -87,7 +87,6 @@ chkconfig
 wget
 chrony
 dracut-config-generic
-extlinux-bootloader
 glibc-langpack-en
 initial-setup
 iw
