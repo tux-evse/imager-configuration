@@ -12,6 +12,7 @@ keyboard --vckeymap=fr --xlayouts='fr'
 #url --mirrorlist "https://mirrors.fedoraproject.org/mirrorlist?repo=fedora-28&arch=aarch64"
 # Additionnal repositories
 repo --name="RedPesk" --baseurl="http://kojihub.lorient.iot/kojifiles/repos-dist/0_RedPesk_HH-release/latest/x86_64/" --cost=1 --install
+repo --name="RedPesk-Build" --baseurl="http://kojihub.lorient.iot/kojifiles/repos/0_RedPesk_HH-build/latest/x86_64/" --cost=1 --install
 # System authorization information
 auth --useshadow --passalgo=sha512
 # Firewall configuration
@@ -43,7 +44,7 @@ autopart --nolvm
 %post
 # work around for poor key import UI in PackageKit
 rm -f /var/lib/rpm/__db*
-releasever=$(rpm -q --qf '%{version}\n' fedora-release)
+releasever=$(rpm -q --qf '%{version}\n' redpesk-release)
 basearch=x86_64
 wget http://kojihub01.lorient.iot/iotbzh-repositories/m3ulcb-bsp/RPM-GPG-KEY-RedPesk-Bootstrap -O /etc/pki/rpm-gpg/RPM-GPG-KEY-RedPesk-Bootstrap
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-RedPesk-Bootstrap
