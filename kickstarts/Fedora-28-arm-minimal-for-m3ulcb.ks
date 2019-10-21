@@ -102,10 +102,10 @@ initial-setup
 iw
 rng-tools
 # Yocto BSP kernel
-kernel-4.14.75+git0+a5266d2981-r1
+kernel-4.14.75+git0+1d76a004d3-r1
 kernel-dev
 kernel-devicetree
-kernel-modules-4.14.75+git0+a5266d2981-r1
+kernel-modules-4.14.75+git0+1d76a004d3-r1
 -@standard
 -dracut-config-rescue
 -generic-release*
