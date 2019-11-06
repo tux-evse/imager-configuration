@@ -83,7 +83,7 @@ name=Redpesk $releasever - $basearch
 failovermethod=priority
 #baseurl=http://download.fedoraproject.org/pub/fedora/linux/releases/$releasever/Everything/$basearch/os/
 #metalink=https://mirrors.fedoraproject.org/metalink?repo=fedora-$releasever&arch=$basearch
-baseurl=http://kojihub.lorient.iot/kojifiles/repos/0_RedPesk_HH-build/latest/x86_64|aarch64/
+baseurl=http://kojihub.lorient.iot/kojifiles/repos/0_RedPesk_HH-build/latest/x86_64--aarch64/
 enabled=1
 #metadata_expire=7d
 #repo_gpgcheck=0
