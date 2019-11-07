@@ -108,6 +108,9 @@ gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-RedPesk-Bootstrap
 skip_if_unavailable=False
 EOF
 
+# Add by default the ttyS0 as console device at boot time
+sed -i '/^GRUB_CMDLINE_LINUX/s:"$: console=ttyS0":' /etc/default/grub
+
 %end
 
 %packages
