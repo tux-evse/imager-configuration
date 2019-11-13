@@ -42,8 +42,8 @@ clearpart --none --initlabel
 reqpart --add-boot
 part pv.01 --grow
 volgroup redpesk-vg0 pv.01
-logvol / --label root --name root --fstype ext4 --vgname redpesk-vg0 --recommended
-logvol /home --label home --name home --fstype ext4 --vgname redpesk-vg0 --recommended
+logvol / --label root --name root --fstype ext4 --vgname redpesk-vg0 --size 4000
+logvol /var --label home --name home --fstype ext4 --vgname redpesk-vg0 --size 5000
 logvol swap --label swap --name swap --fstype swap --vgname redpesk-vg0 --recommended
 
 %post
