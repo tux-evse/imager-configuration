@@ -42,9 +42,9 @@ clearpart --none --initlabel
 reqpart --add-boot
 part pv.01 --grow
 volgroup redpesk-vg0 pv.01
-logvol / --label root --fstype ext4 --recommended
-logvol /home --label home --fstype ext4 --recommended
-logvol swap --label swap --fstype swap --recommended
+logvol / --label root --name root --fstype ext4 --vgname redpesk-vg0 --recommended
+logvol /home --label home --name home --fstype ext4 --vgname redpesk-vg0 --recommended
+logvol swap --label swap --name swap --fstype swap --vgname redpesk-vg0 --recommended
 
 %post
 # work around for poor key import UI in PackageKit
