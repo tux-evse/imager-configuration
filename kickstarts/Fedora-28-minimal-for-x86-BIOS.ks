@@ -48,6 +48,7 @@ releasever=$(rpm -q --qf '%{version}\n' redpesk-release)
 basearch=x86_64
 wget http://kojihub01.lorient.iot/iotbzh-repositories/m3ulcb-bsp/RPM-GPG-KEY-RedPesk-Bootstrap -O /etc/pki/rpm-gpg/RPM-GPG-KEY-RedPesk-Bootstrap
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-RedPesk-Bootstrap
+rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-RedPesk-8-primary
 rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-$releasever-$basearch
 echo "Packages within this disk image"
 rpm -qa
@@ -57,60 +58,19 @@ rm -f /var/lib/rpm/__db*
 # remove random seed, the newly installed instance should make it's own
 rm -f /var/lib/systemd/random-seed
 
-# Because memory is scarce resource in most arm systems we are differing from the Fedora
-# default of having /tmp on tmpfs.
-echo "Disabling tmpfs for /tmp."
-systemctl mask tmp.mount
-
-dnf -y remove dracut-config-generic
-
 # Remove machine-id on pre generated images
 rm -f /etc/machine-id
 touch /etc/machine-id
-
 %end
 
 %post
-
 # setup systemd to boot to the right runlevel
 echo -n "Setting default runlevel to multiuser text mode"
 rm -f /etc/systemd/system/default.target
 ln -s /lib/systemd/system/multi-user.target /etc/systemd/system/default.target
-echo .
-cat << EOF >> /etc/yum.repos.d/redpesk.repo
-[redpesk]
-name=Redpesk $releasever - $basearch
-failovermethod=priority
-#baseurl=http://download.fedoraproject.org/pub/fedora/linux/releases/$releasever/Everything/$basearch/os/
-#metalink=https://mirrors.fedoraproject.org/metalink?repo=fedora-$releasever&arch=$basearch
-baseurl=http://kojihub.lorient.iot/kojifiles/repos/0_RedPesk_HH-build/latest/x86_64--aarch64/
-enabled=1
-#metadata_expire=7d
-#repo_gpgcheck=0
-type=rpm
-gpgcheck=0
-#gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-$releasever-$basearch
-skip_if_unavailable=False
-excludepkgs=kernel*
-
-[m3ulcb-bsp]
-name=Redpesk m3ulcb BSP $releasever - $basearch
-failovermethod=priority
-#baseurl=http://download.fedoraproject.org/pub/fedora/linux/releases/$releasever/Everything/$basearch/os/
-#metalink=https://mirrors.fedoraproject.org/metalink?repo=fedora-$releasever&arch=$basearch
-baseurl=http://kojihub01.lorient.iot/iotbzh-repositories/m3ulcb-bsp/
-enabled=1
-#metadata_expire=7d
-#repo_gpgcheck=0
-type=rpm
-gpgcheck=0
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-RedPesk-Bootstrap
-skip_if_unavailable=False
-EOF
 
 # Add by default the ttyS0 as console device at boot time
 sed -i '/^GRUB_CMDLINE_LINUX/s:"$: console=ttyS0":' /etc/default/grub
-
 %end
 
 %packages
@@ -125,6 +85,8 @@ glibc-langpack-en
 initial-setup
 iw
 rng-tools
+redpesk-repos
+redpesk-release-iot
 -@standard
 -dracut-config-rescue
 -generic-release*
@@ -133,8 +95,6 @@ rng-tools
 -ipw*
 -iwl*
 -trousers
--uboot-images-armv8
 -usb_modeswitch
 -xkeyboard-config
-
 %end
