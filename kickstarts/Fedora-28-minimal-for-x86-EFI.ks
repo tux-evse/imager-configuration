@@ -36,7 +36,7 @@ install
 services --enabled="sshd,NetworkManager,chronyd,initial-setup"
 # System bootloader configuration
 zerombr
-bootloader --location=mbr --boot-drive=vda
+bootloader --location=mbr --boot-drive=vda --append="console=ttyS0"
 # Partition clearing information
 clearpart --none --initlabel
 reqpart --add-boot
@@ -72,9 +72,6 @@ touch /etc/machine-id
 echo -n "Setting default runlevel to multiuser text mode"
 rm -f /etc/systemd/system/default.target
 ln -s /lib/systemd/system/multi-user.target /etc/systemd/system/default.target
-
-# Add by default the ttyS0 as console device at boot time
-sed -i '/^GRUB_CMDLINE_LINUX/s:"$: console=ttyS0":' /etc/default/grub
 %end
 
 %packages

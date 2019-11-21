@@ -36,7 +36,7 @@ install
 services --enabled="sshd,NetworkManager,chronyd,initial-setup"
 # System bootloader configuration
 zerombr
-bootloader --location=mbr --boot-drive=vda
+bootloader --location=mbr --boot-drive=vda --append="console=ttyS0"
 # Partition clearing information
 clearpart --none --initlabel
 autopart --nolvm
