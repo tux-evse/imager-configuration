@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE variants PUBLIC "-//Red Hat, Inc.//DTD Variants info//EN" "variants2012.dtd">
+<variants>
+    <variant id="Cloud" name="Cloud" type="variant" is_empty="true">
+        <arches>
+            <arch>aarch64</arch>
+            <arch>ppc64le</arch>
+            <arch>s390x</arch>
+            <arch>x86_64</arch>
+        </arches>
+    </variant>
+    <variant id="Container" name="Container" type="variant" is_empty="true">
+        <arches>
+            <arch>aarch64</arch>
+            <arch>armhfp</arch>
+            <arch>ppc64le</arch>
+            <arch>s390x</arch>
+            <arch>x86_64</arch>
+        </arches>
+    </variant>
+    <variant id="Everything" name="Everything" type="variant">
+        <arches>
+            <arch>aarch64</arch>
+            <arch>armhfp</arch>
+            <arch>ppc64le</arch>
+            <arch>s390x</arch>
+            <arch>x86_64</arch>
+        </arches>
+    </variant>
+    <variant id="Labs" name="Labs" type="variant" is_empty="true">
+        <arches>
+            <arch>armhfp</arch>
+            <arch>x86_64</arch>
+        </arches>
+    </variant>
+    <variant id="Server" name="Server" type="variant">
+        <arches>
+            <arch>armhfp</arch>
+            <arch>aarch64</arch>
+            <arch>ppc64le</arch>
+            <arch>s390x</arch>
+            <arch>x86_64</arch>
+        </arches>
+        <groups>
+            <group default="true">guest-agents</group>
+            <group default="true">standard</group>
+            <group default="true">core</group>
+            <group default="true">hardware-support</group>
+            <group default="true">networkmanager-submodules</group>
+            <group default="true">^server-product-environment</group>
+            <group default="true">server-product</group>
+            <group default="true">headless-management</group>
+            <group default="true">container-management</group>
+            <group default="true">domain-client</group>
+            <group default="true">server-hardware-support</group>
+            <group default="true">arm-tools</group>
+            <!-- Things needed for installation -->
+            <group default="true">anaconda-tools</group>
+            <group default="true">platform-vmware</group>
+        </groups>
+        <environments>
+          <environment display_order="2">server-product-environment</environment>
+          <environment display_order="99">custom-environment</environment>
+        </environments>
+    </variant>
+    <variant id="Spins" name="Spins" type="variant" is_empty="true">
+        <arches>
+            <arch>aarch64</arch>
+            <arch>armhfp</arch>
+            <arch>x86_64</arch>
+        </arches>
+    </variant>
+    <variant id="Workstation" name="Workstation" type="variant" is_empty="true">
+        <arches>
+            <arch>aarch64</arch>
+            <arch>armhfp</arch>
+            <arch>x86_64</arch>
+            <arch>ppc64le</arch>
+        </arches>
+    </variant>
+    <variant id="Silverblue" name="Silverblue" type="variant" is_empty="true">
+        <arches>
+            <arch>aarch64</arch>
+            <arch>armhfp</arch>
+            <arch>x86_64</arch>
+            <arch>ppc64le</arch>
+        </arches>
+    </variant>
+    <variant id="Modular" name="Modular" type="variant">
+        <arches>
+            <arch>armhfp</arch>
+            <arch>aarch64</arch>
+            <arch>ppc64le</arch>
+            <arch>s390x</arch>
+            <arch>x86_64</arch>
+        </arches>
+        <modules>
+            <kojitag>f32-modular</kojitag>
+        </modules>
+    </variant>
+</variants>
