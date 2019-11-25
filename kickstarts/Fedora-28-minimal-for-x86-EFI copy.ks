@@ -67,3 +67,4 @@ ln -s /lib/systemd/system/multi-user.target /etc/systemd/system/default.target
 
 %packages
 @core
+%end
