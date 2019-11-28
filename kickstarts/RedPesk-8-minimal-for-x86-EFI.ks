@@ -2,6 +2,8 @@
 text
 #version=DEVEL
 eula --agreed
+# Use automatic partioning on vda
+ignoredisk --only-use=vda
 # System language
 lang en_US.UTF-8
 # Keyboard layouts
@@ -19,9 +21,16 @@ firewall --enabled --service=mdns,ssh
 firstboot --reconfig
 # SELinux configuration
 selinux --disabled
+# Timezone setup
+timezone --isUtc Europe/Paris
 # Root password setup
 rootpw Image_is_securized!
-
+# Do not configure the X Window System
+skipx
+# Reboot the image once installed. ImageFactory look for that!
+reboot
+# Do the install
+install
 
 # System services
 services --enabled="sshd,NetworkManager,chronyd,initial-setup"
@@ -63,8 +72,34 @@ touch /etc/machine-id
 echo -n "Setting default runlevel to multiuser text mode"
 rm -f /etc/systemd/system/default.target
 ln -s /lib/systemd/system/multi-user.target /etc/systemd/system/default.target
+# Install is made using nomodeset flag but we don't need it to use the system.
+# It works alright.
+sed -i -r 's: ?nomodeset ?::' /etc/default/grub
+dracut --force --regenerate-all
 %end
 
 %packages
 @core
+@hardware-support
+NetworkManager-wifi
+chkconfig
+wget
+chrony
+dracut-config-generic
+glibc-langpack-en
+initial-setup
+iw
+rng-tools
+redpesk-repos
+redpesk-release-iot
+-@standard
+-dracut-config-rescue
+-generic-release*
+-initial-setup-gui
+-iproute-tc
+-ipw*
+-iwl*
+-trousers
+-usb_modeswitch
+-xkeyboard-config
 %end
