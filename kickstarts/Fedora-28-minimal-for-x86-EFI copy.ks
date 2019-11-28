@@ -1,5 +1,5 @@
 # Use the text interface not the graphical one
-# text
+text
 #version=DEVEL
 eula --agreed
 # System language
