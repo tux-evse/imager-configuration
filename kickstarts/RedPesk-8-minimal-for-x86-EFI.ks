@@ -36,7 +36,7 @@ install
 services --enabled="sshd,NetworkManager,chronyd,initial-setup"
 # System bootloader configuration
 zerombr
-bootloader --location=mbr --boot-drive=vda --append="console=ttyS0"
+bootloader --location=mbr --boot-drive=vda
 # Partition clearing information
 clearpart --none --initlabel
 reqpart --add-boot
@@ -72,6 +72,7 @@ touch /etc/machine-id
 echo -n "Setting default runlevel to multiuser text mode"
 rm -f /etc/systemd/system/default.target
 ln -s /lib/systemd/system/multi-user.target /etc/systemd/system/default.target
+
 # Install is made using nomodeset flag but we don't need it to use the system.
 # It works alright.
 sed -i -r 's: ?nomodeset ?::' /etc/default/grub
