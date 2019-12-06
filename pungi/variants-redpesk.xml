@@ -1,18 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE variants PUBLIC "-//IoT.BZH.//DTD Variants info//EN" "variants2012.dtd">
 <variants>
-    <variant id="Cloud" name="Cloud" type="variant" is_empty="true">
-        <arches>
-            <arch>aarch64</arch>
-            <arch>x86_64</arch>
-        </arches>
-    </variant>
-    <variant id="Container" name="Container" type="variant" is_empty="true">
-        <arches>
-            <arch>aarch64</arch>
-            <arch>x86_64</arch>
-        </arches>
-    </variant>
     <variant id="Everything" name="Everything" type="variant">
         <arches>
             <arch>aarch64</arch>
@@ -45,23 +33,5 @@
           <environment display_order="2">server-product-environment</environment>
           <environment display_order="99">custom-environment</environment>
         </environments>
-    </variant>
-    <variant id="Spins" name="Spins" type="variant" is_empty="true">
-        <arches>
-            <arch>aarch64</arch>
-            <arch>x86_64</arch>
-        </arches>
-    </variant>
-    <variant id="Workstation" name="Workstation" type="variant" is_empty="true">
-        <arches>
-            <arch>aarch64</arch>
-            <arch>x86_64</arch>
-        </arches>
-    </variant>
-    <variant id="Silverblue" name="Silverblue" type="variant" is_empty="true">
-        <arches>
-            <arch>aarch64</arch>
-            <arch>x86_64</arch>
-        </arches>
     </variant>
 </variants>
