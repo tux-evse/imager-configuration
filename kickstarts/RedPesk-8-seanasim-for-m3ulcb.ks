@@ -135,4 +135,13 @@ kernel-modules-4.14.75+git0+1d76a004d3-r1
 -usb_modeswitch
 -xkeyboard-config
 
+# specific for seanasim
+agl-service-can-low-level
+agl-service-signal-composer
+murmur
+
+# ...Wanted packages, Waiting for functionnal SPEC files...
+# autopilot
+# modbus
+# can-eth
 %end
