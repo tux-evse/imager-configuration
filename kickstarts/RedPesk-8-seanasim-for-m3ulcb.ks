@@ -36,7 +36,7 @@ install
 services --enabled="sshd,NetworkManager,chronyd,initial-setup"
 # System bootloader configuration
 zerombr
-bootloader --location=mbr --boot-drive=vda --append="console=ttyS0"
+bootloader --location=mbr --boot-drive=vda --append=" security=none"
 # Partition clearing information
 clearpart --none --initlabel
 autopart --nolvm
@@ -144,4 +144,11 @@ murmur
 # autopilot
 # modbus
 # can-eth
+
+#agl-service-can-low-level
+#agl-service-gps
+#agl-service-helloworld
+#agl-service-modbus
+#agl-service-signal-composer
+
 %end
