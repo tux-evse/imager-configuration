@@ -33,7 +33,7 @@ text
 services --enabled="sshd,NetworkManager,chronyd,initial-setup"
 # System bootloader configuration
 #bootloader --location=mbr --boot-drive=vda
-bootloader --location=mbr --boot-drive=vda --append=" console=ttyS0"
+bootloader --location=mbr --boot-drive=vda --append=" security=none"
 reqpart --add-boot
 # Clear the Master Boot Record
 zerombr
@@ -148,8 +148,8 @@ rm -f /etc/systemd/system/default.target
 ln -s /lib/systemd/system/multi-user.target /etc/systemd/system/default.target
 
 # Add by default the ttyS0 as console device at boot time
-sed -i -r 's:nomodeset ::' /etc/default/grub
-sed -i -r 's:quiet ::' /etc/default/grub
+sed -i -r 's:nomodeset( ?): :' /etc/default/grub
+sed -i -r 's:quiet( ?):\1:' /etc/default/grub
 grub2-mkconfig -o /etc/grub2-efi.cfg
 
 %end
@@ -159,8 +159,7 @@ grub2-mkconfig -o /etc/grub2-efi.cfg
 redpesk-release-iot
 redpesk-repos
 initial-setup
-wget
-tar
+#wget
 sway
 i3status
 rofi
@@ -173,9 +172,15 @@ alsa-lib
 alsa-tools
 alsa-utils
 alsa-firmware
+# TODO : get rid of PA if we get 4A working
 pulseaudio
 pulseaudio-utils
 sox
 #anbox
 redpesk-seanasim
+# agl
+agl-app-framework-binder
+agl-app-framework-main
+agl-appli-homescreen-html
+#agl-appli-mixer-html
 %end
