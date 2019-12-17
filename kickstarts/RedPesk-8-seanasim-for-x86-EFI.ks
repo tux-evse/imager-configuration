@@ -3,6 +3,8 @@
 keyboard --vckeymap=fr --xlayouts='fr'
 # Root password
 rootpw --plaintext demo2020
+# set hostname
+network --hostname CES2020-nuc
 # System language
 lang en_US.UTF-8
 # License agreement
