@@ -24,7 +24,9 @@ selinux --disabled
 # Timezone setup
 timezone --isUtc Europe/Paris
 # Root password setup
-rootpw Image_is_securized!
+rootpw demo2020
+# set hostname
+network --hostname CES2020-m3ulcb
 # Do not configure the X Window System
 skipx
 # Reboot the image once installed. ImageFactory look for that!
