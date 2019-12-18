@@ -150,8 +150,7 @@ rm -f /etc/systemd/system/default.target
 ln -s /lib/systemd/system/multi-user.target /etc/systemd/system/default.target
 
 # Add by default the ttyS0 as console device at boot time
-sed -i -r 's:nomodeset( ?): :' /etc/default/grub
-sed -i -r 's:quiet( ?):\1:' /etc/default/grub
+sed -i -r 's:(nomodeset|quiet|rhgb) ?::g' /etc/default/grub
 grub2-mkconfig -o /etc/grub2-efi.cfg
 
 %end
