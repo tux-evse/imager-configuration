@@ -74,75 +74,6 @@ rm -f /etc/machine-id
 touch /etc/machine-id
 %end
 
-
-%post
-#tweak repo files (TO BE REMOVED !!!!)
-cat << EOF > /etc/yum.repos.d/fedora.repo
-[fedora]
-name=Fedora 2\$releasever - \$basearch
-#baseurl=http://download.fedoraproject.org/pub/fedora/linux/releases/2\$releasever/Everything/\$basearch/os/
-metalink=https://mirrors.fedoraproject.org/metalink?repo=fedora-2\$releasever&arch=\$basearch
-enabled=1
-metadata_expire=7d
-repo_gpgcheck=0
-type=rpm
-gpgcheck=0
-#gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redpesk-\$releasever-\$basearch
-skip_if_unavailable=False
-
-[fedora-updates]
-name=Fedora 2\$releasever - \$basearch - Updates
-#baseurl=http://download.fedoraproject.org/pub/fedora/linux/updates/2\$releasever/Everything/\$basearch/
-metalink=https://mirrors.fedoraproject.org/metalink?repo=updates-released-f2\$releasever&arch=\$basearch
-enabled=1
-repo_gpgcheck=0
-type=rpm
-gpgcheck=0
-metadata_expire=6h
-#gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redpesk-\$releasever-primary
-skip_if_unavailable=False
-EOF
-
-cat << EOF > /etc/yum.repos.d/redpesk.repo
-[redpesk]
-name=RedPesk \$releasever - \$basearch
-baseurl=http://kojihub.lorient.iot/kojifiles/repos-dist/0_RedPesk_HH-release/latest/\$basearch
-#metalink=https://mirrors.redpesk.bzh/metalink?repo=redpesk-\$releasever&arch=\$basearch
-enabled=1
-#metadata_expire=7d
-repo_gpgcheck=0
-type=rpm
-gpgcheck=0
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redpesk-\$releasever-\$basearch
-skip_if_unavailable=False
-
-[redpesk-debuginfo]
-name=RedPesk \$releasever - \$basearch - Debug
-baseurl=http://kojihub.lorient.iot/kojifiles/repos-dist/0_RedPesk_HH-release/latest/\$basearch/
-#metalink=https://mirrors.redpesk.bzh/metalink?repo=redpesk-debug-\$releasever&arch=\$basearch
-enabled=1
-metadata_expire=7d
-repo_gpgcheck=0
-type=rpm
-gpgcheck=0
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redpesk-\$releasever-\$basearch
-skip_if_unavailable=False
-
-[redpesk-source]
-name=RedPesk \$releasever - Source
-baseurl=http://kojihub.lorient.iot/kojifiles/repos-dist/0_RedPesk_HH-release/\$basearch/
-#metalink=https://mirrors.redpesk.bzh/metalink?repo=redpesk-source-\$releasever&arch=\$basearch
-enabled=0
-metadata_expire=7d
-repo_gpgcheck=0
-type=rpm
-gpgcheck=1
-gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-redpesk-\$releasever-\$basearch/
-skip_if_unavailable=False
-EOF
-%end
-
-
 %post
 # setup systemd to boot to the right runlevel
 echo -n "Setting default runlevel to multiuser text mode"
@@ -157,10 +88,11 @@ grub2-mkconfig -o /etc/grub2-efi.cfg
 
 %packages
 @core
+electron
 redpesk-release-iot
 redpesk-repos
 initial-setup
-#wget
+wget
 sway
 i3status
 rofi
