@@ -47,10 +47,6 @@ volgroup redpesk-vg0 pv.01
 logvol / --fstype="ext4" --grow --size=7000 --label="root" --name=root --vgname=redpesk-vg0
 logvol swap --fstype="swap" --size=1000 --label="swap" --name=swap --vgname=redpesk-vg0
 
-# demo user
-#user --name demoCES2020 --password demo2020
-
-
 
 %post
 # work around for poor key import UI in PackageKit
@@ -80,8 +76,7 @@ echo -n "Setting default runlevel to multiuser text mode"
 rm -f /etc/systemd/system/default.target
 ln -s /lib/systemd/system/multi-user.target /etc/systemd/system/default.target
 
-# Add by default the ttyS0 as console device at boot time
-sed -i -r 's:(nomodeset|quiet|rhgb) ?::g' /etc/default/grub
+sed -i -r 's:(nomodeset|quiet|rhgb) ?: :g' /etc/default/grub
 grub2-mkconfig -o /etc/grub2-efi.cfg
 
 %end
@@ -92,8 +87,7 @@ electron
 redpesk-release-iot
 redpesk-repos
 initial-setup
-wget
-sway
+i3
 i3status
 rofi
 opencpn
@@ -110,6 +104,7 @@ pulseaudio
 pulseaudio-utils
 sox
 #anbox
+iotop
 redpesk-seanasim
 # agl
 agl-app-framework-binder
