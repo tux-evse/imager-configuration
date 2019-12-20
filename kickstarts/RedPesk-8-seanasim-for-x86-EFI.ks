@@ -55,7 +55,7 @@ releasever=$(rpm -q --qf '%{version}\n' redpesk-release)
 basearch=x86_64
 #wget http://kojihub01.lorient.iot/iotbzh-repositories/m3ulcb-bsp/RPM-GPG-KEY-RedPesk-Bootstrap -O /etc/pki/rpm-gpg/RPM-GPG-KEY-RedPesk-Bootstrap
 #rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-RedPesk-Bootstrap
-rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-redPesk-8-primary
+rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-redpesk-8-primary
 #rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-fedora-$releasever-$basearch
 echo "Packages within this disk image"
 rpm -qa
@@ -111,7 +111,6 @@ electron
 agl-app-framework-binder
 agl-app-framework-main
 agl-appli-homescreen-html
-agl-appli-mixer-html
 agl-appli-mixer-html
 4a-mixer
 web-mumble
