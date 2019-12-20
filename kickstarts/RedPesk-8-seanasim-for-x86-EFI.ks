@@ -2,7 +2,7 @@
 # Keyboard layouts
 keyboard --vckeymap=fr --xlayouts='fr'
 # Root password
-rootpw --plaintext demo2020
+rootpw --plaintext demo
 # set hostname
 network --hostname CES2020-nuc
 # System language
@@ -105,7 +105,8 @@ pulseaudio-utils
 sox
 #anbox
 iotop
-redpesk-seanasim
+htop
+redpesk-seanasim-x86
 # agl
 agl-app-framework-binder
 agl-app-framework-main
