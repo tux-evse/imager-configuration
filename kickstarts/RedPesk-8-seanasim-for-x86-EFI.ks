@@ -83,10 +83,12 @@ grub2-mkconfig -o /etc/grub2-efi.cfg
 
 %packages
 @core
-electron
 redpesk-release-iot
 redpesk-repos
+redpesk-seanasim-x64
 initial-setup
+iotop
+htop
 i3
 i3status
 rofi
@@ -104,12 +106,13 @@ pulseaudio
 pulseaudio-utils
 sox
 #anbox
-iotop
-htop
-redpesk-seanasim-x64
+electron
 # agl
 agl-app-framework-binder
 agl-app-framework-main
 agl-appli-homescreen-html
-#agl-appli-mixer-html
+agl-appli-mixer-html
+agl-appli-mixer-html
+4a-mixer
+web-mumble
 %end
