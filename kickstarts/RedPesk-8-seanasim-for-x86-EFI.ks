@@ -106,7 +106,7 @@ sox
 #anbox
 iotop
 htop
-redpesk-seanasim-x86
+redpesk-seanasim-x64
 # agl
 agl-app-framework-binder
 agl-app-framework-main
