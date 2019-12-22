@@ -42,10 +42,8 @@ zerombr
 # Partition clearing information
 clearpart --none --initlabel
 # Disk partitioning information
-part pv.01 --grow
-volgroup redpesk-vg0 pv.01
-logvol / --fstype="ext4" --grow --size=7000 --label="root" --name=root --vgname=redpesk-vg0
-logvol swap --fstype="swap" --size=1000 --label="swap" --name=swap --vgname=redpesk-vg0
+part / --fstype="ext4" --grow --size=7000 --label="root
+part swap --fstype="swap" --size=1000 --label="swap"
 
 
 %post
