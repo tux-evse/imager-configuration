@@ -138,19 +138,13 @@ kernel-modules-4.14.75+git0+1d76a004d3-r1
 -xkeyboard-config
 
 # specific for seanasim
-agl-service-can-low-level
 agl-service-signal-composer
 murmur
-
-# ...Wanted packages, Waiting for functionnal SPEC files...
-# autopilot
-# modbus
-# can-eth
-
-#agl-service-can-low-level
+agl-service-can-low-level-ces2020
 #agl-service-gps
 #agl-service-helloworld
-#agl-service-modbus
-#agl-service-signal-composer
+agl-service-modbus
+autopilot-binding
+agl-service-signal-composer
 
 %end
