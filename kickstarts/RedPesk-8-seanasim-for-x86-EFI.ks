@@ -42,7 +42,7 @@ zerombr
 # Partition clearing information
 clearpart --none --initlabel
 # Disk partitioning information
-part / --fstype="ext4" --grow --size=7000 --label="root
+part / --fstype="ext4" --grow --size=7000 --label="root"
 part swap --fstype="swap" --size=1000 --label="swap"
 
 
