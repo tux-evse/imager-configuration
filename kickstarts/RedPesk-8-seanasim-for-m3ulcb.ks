@@ -100,6 +100,8 @@ gpgcheck=0
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-RedPesk-Bootstrap
 skip_if_unavailable=False
 EOF
+
+systemctl disable firewalld ||:
 %end
 
 %packages
