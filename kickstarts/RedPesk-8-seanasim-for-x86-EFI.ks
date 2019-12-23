@@ -110,6 +110,7 @@ agl-app-framework-binder
 agl-app-framework-main
 agl-appli-homescreen-html
 agl-appli-mixer-html
+agl-appli-hvac-html
 4a-mixer
 web-mumble
 %end
