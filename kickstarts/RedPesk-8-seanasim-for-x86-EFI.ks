@@ -78,6 +78,8 @@ sed -i -r 's:(nomodeset|quiet|rhgb) ?: :g' /etc/default/grub
 grub2-mkconfig -o /etc/grub2-efi.cfg
 
 systemctl disable firewalld ||:
+systemctl start afm-system-setup.service afm-system-daemon.service ||:
+dnf install -y --nogpgcheck agl-appli-homescreen-html agl-appli-mixer-html agl-appli-hvac-html 4a-mixer 4a-redpesk-audio-service web-mumble ||:
 %end
 
 %packages
@@ -105,12 +107,12 @@ sox
 #anbox
 electron
 # agl
-agl-app-framework-binder
-agl-app-framework-main
-agl-appli-homescreen-html
-agl-appli-mixer-html
-agl-appli-hvac-html
-4a-mixer
-4a-redpesk-audio-service
-web-mumble
+#agl-app-framework-binder
+#agl-app-framework-main
+#agl-appli-homescreen-html
+#agl-appli-mixer-html
+#agl-appli-hvac-html
+#4a-mixer
+#4a-redpesk-audio-service
+#web-mumble
 %end
