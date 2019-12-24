@@ -78,7 +78,6 @@ sed -i -r 's:(nomodeset|quiet|rhgb) ?: :g' /etc/default/grub
 grub2-mkconfig -o /etc/grub2-efi.cfg
 
 systemctl disable firewalld ||:
-
 %end
 
 %packages
@@ -101,9 +100,7 @@ alsa-lib
 alsa-tools
 alsa-utils
 alsa-firmware
-# TODO : get rid of PA if we get 4A working
-pulseaudio
-pulseaudio-utils
+-pulseaudio
 sox
 #anbox
 electron
@@ -114,5 +111,6 @@ agl-appli-homescreen-html
 agl-appli-mixer-html
 agl-appli-hvac-html
 4a-mixer
+4a-redpesk-audio-service
 web-mumble
 %end
