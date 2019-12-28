@@ -77,6 +77,10 @@ ln -s /lib/systemd/system/multi-user.target /etc/systemd/system/default.target
 sed -i -r 's:(nomodeset|quiet|rhgb) ?: :g' /etc/default/grub
 grub2-mkconfig -o /etc/grub2-efi.cfg
 
+# First workaround disable lvm2-monitor by default
+# If had time need to avoid install at all lvm2 packages
+# by adding a line '-lvm2' in %package section
+systemctl disable lvm2-monitor ||:
 systemctl disable firewalld ||:
 systemctl start afm-system-setup.service afm-system-daemon.service ||:
 dnf install -y --nogpgcheck agl-appli-homescreen-html agl-appli-mixer-html agl-appli-hvac-html 4a-mixer 4a-redpesk-audio-service web-mumble ||:
