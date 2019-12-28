@@ -102,6 +102,10 @@ skip_if_unavailable=False
 EOF
 
 systemctl disable firewalld ||:
+# First workaround disable lvm2-monitor by default
+# If had time need to avoid install at all lvm2 packages
+# by adding a line '-lvm2' in %package section
+systemctl disable lvm2-monitor ||:
 %end
 
 %packages
