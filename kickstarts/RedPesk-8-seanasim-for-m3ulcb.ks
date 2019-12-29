@@ -85,6 +85,7 @@ rm -f /etc/systemd/system/default.target
 ln -s /lib/systemd/system/multi-user.target /etc/systemd/system/default.target
 echo .
 
+mkdir -p /usr/local/lib/systemd/system/
 cat << EOF >> /usr/local/lib/systemd/system/rp-setup.service
 [Unit]
 Description=Initial Setup reconfiguration mode trigger service

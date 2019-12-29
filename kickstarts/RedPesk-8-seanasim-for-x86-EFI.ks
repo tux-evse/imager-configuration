@@ -77,6 +77,7 @@ ln -s /lib/systemd/system/multi-user.target /etc/systemd/system/default.target
 sed -i -r 's:(nomodeset|quiet|rhgb) ?: :g' /etc/default/grub
 grub2-mkconfig -o /etc/grub2-efi.cfg
 
+mkdir -p /usr/local/lib/systemd/system/
 cat << EOF >> /usr/local/lib/systemd/system/rp-setup.service
 [Unit]
 Description=Initial Setup reconfiguration mode trigger service
