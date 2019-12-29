@@ -85,6 +85,32 @@ rm -f /etc/systemd/system/default.target
 ln -s /lib/systemd/system/multi-user.target /etc/systemd/system/default.target
 echo .
 
+cat << EOF >> /usr/local/lib/systemd/system/rp-setup.service
+[Unit]
+Description=Initial Setup reconfiguration mode trigger service
+After=plymouth-quit-wait.service
+After=afm-system-daemon.service
+After=NetworkManager-wait-online.service
+Wants=NetworkManager-wait-online.service
+ConditionPathExists=/.unconfigured
+
+[Service]
+Type=oneshot
+TimeoutSec=0
+RemainAfterExit=yes
+ExecStartPre=/usr/bin/wget http://kojihub01.lorient.iot/rp-setup-m3ulcb -O /usr/libexec/rp-setup
+ExecStart=/usr/bin/bash -c "source /usr/libexec/rp-setup"
+ExecStartPost=/usr/bin/rm -f /.unconfigured
+TimeoutSec=0
+RemainAfterExit=no
+
+[Install]
+WantedBy=graphical.target
+WantedBy=multi-user.target
+EOF
+
+systemctl enable rp-setup.service
+
 cat << EOF >> /etc/yum.repos.d/redpesk-rcar-m3ulcb.repo
 [m3ulcb-bsp]
 name=Redpesk m3ulcb BSP $releasever - $basearch
@@ -139,13 +165,11 @@ kernel-modules-4.14.75+git0+1d76a004d3-r1
 -lvm2
 
 # specific for seanasim
-agl-service-signal-composer
-murmur
-agl-service-can-low-level-ces2020
-#agl-service-gps
-#agl-service-helloworld
-agl-service-modbus
-autopilot-binding
-agl-service-signal-composer
+# agl bidning installed via script in kojihub01
+#agl-service-signal-composer
+#murmur
+#agl-service-can-low-level-ces2020
+#agl-service-modbus
+#autopilot-binding
 
 %end

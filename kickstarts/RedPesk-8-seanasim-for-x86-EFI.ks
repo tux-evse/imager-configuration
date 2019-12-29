@@ -77,8 +77,31 @@ ln -s /lib/systemd/system/multi-user.target /etc/systemd/system/default.target
 sed -i -r 's:(nomodeset|quiet|rhgb) ?: :g' /etc/default/grub
 grub2-mkconfig -o /etc/grub2-efi.cfg
 
-systemctl start afm-system-setup.service afm-system-daemon.service ||:
-dnf install -y --nogpgcheck agl-appli-homescreen-html agl-appli-mixer-html agl-appli-hvac-html 4a-mixer 4a-redpesk-audio-service web-mumble ||:
+cat << EOF >> /usr/local/lib/systemd/system/rp-setup.service
+[Unit]
+Description=Initial Setup reconfiguration mode trigger service
+After=plymouth-quit-wait.service
+After=afm-system-daemon.service
+After=NetworkManager-wait-online.service
+Wants=NetworkManager-wait-online.service
+ConditionPathExists=/.unconfigured
+
+[Service]
+Type=oneshot
+TimeoutSec=0
+RemainAfterExit=yes
+ExecStartPre=/usr/bin/wget http://kojihub01.lorient.iot/rp-setup-x86 -O /usr/libexec/rp-setup
+ExecStart=/usr/bin/bash -c "source /usr/libexec/rp-setup"
+ExecStartPost=/usr/bin/rm -f /.unconfigured
+TimeoutSec=0
+RemainAfterExit=no
+
+[Install]
+WantedBy=graphical.target
+WantedBy=multi-user.target
+EOF
+
+systemctl enable rp-setup.service
 %end
 
 %packages
@@ -105,7 +128,7 @@ alsa-firmware
 sox
 #anbox
 electron
-# agl
+# agl bidning installed via script in kojihub01
 #agl-app-framework-binder
 #agl-app-framework-main
 #agl-appli-homescreen-html
