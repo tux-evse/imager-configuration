@@ -16,7 +16,7 @@ timezone Europe/Paris --isUtc
 # System authorization information
 auth --useshadow --passalgo=sha512
 # Firewall configuration
-firewall --enabled --service=mdns,ssh
+firewall --disable
 ignoredisk --only-use=vda
 repo --name="koji-override-0" --baseurl=http://kojihub.lorient.iot/kojifiles/repos/0_RedPesk_HH-build/latest/x86_64/
 repo --name="koji-override-1" --baseurl=http://fmirrors.lorient.iot/fmirrors/fedora/linux/releases/28/Everything/x86_64/os
@@ -24,7 +24,7 @@ repo --name="koji-override-1" --baseurl=http://fmirrors.lorient.iot/fmirrors/fed
 #url --url="https://archives.fedoraproject.org/pub/archive/fedora/linux/releases/28/Everything/x86_64/os/"
 url --url="http://fmirrors.lorient.iot/fmirrors/fedora/linux/releases/28/Everything/x86_64/os"
 # Run the Setup Agent on first boot
-firstboot --reconfig
+firstboot --disable
 # SELinux configuration
 selinux --disabled
 # Do not configure the X Window System
@@ -32,7 +32,7 @@ skipx
 text
 
 # System services
-services --enabled="sshd,NetworkManager,chronyd,initial-setup"
+services --enabled="sshd,NetworkManager,chronyd"
 # System bootloader configuration
 #bootloader --location=mbr --boot-drive=vda
 bootloader --location=mbr --boot-drive=vda --append=" security=none"
@@ -77,11 +77,6 @@ ln -s /lib/systemd/system/multi-user.target /etc/systemd/system/default.target
 sed -i -r 's:(nomodeset|quiet|rhgb) ?: :g' /etc/default/grub
 grub2-mkconfig -o /etc/grub2-efi.cfg
 
-# First workaround disable lvm2-monitor by default
-# If had time need to avoid install at all lvm2 packages
-# by adding a line '-lvm2' in %package section
-systemctl disable lvm2-monitor ||:
-systemctl disable firewalld ||:
 systemctl start afm-system-setup.service afm-system-daemon.service ||:
 dnf install -y --nogpgcheck agl-appli-homescreen-html agl-appli-mixer-html agl-appli-hvac-html 4a-mixer 4a-redpesk-audio-service web-mumble ||:
 %end
@@ -91,7 +86,6 @@ dnf install -y --nogpgcheck agl-appli-homescreen-html agl-appli-mixer-html agl-a
 redpesk-release-iot
 redpesk-repos
 redpesk-seanasim-x64
-initial-setup
 iotop
 htop
 i3
@@ -107,6 +101,7 @@ alsa-tools
 alsa-utils
 alsa-firmware
 -pulseaudio
+-lvm2
 sox
 #anbox
 electron

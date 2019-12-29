@@ -16,9 +16,9 @@ repo --name="m3ulcb-bsp" --baseurl="http://kojihub01.lorient.iot/iotbzh-reposito
 # System authorization information
 auth --useshadow --passalgo=sha512
 # Firewall configuration
-firewall --enabled --service=mdns,ssh
+firewall --disable
 # Run the Setup Agent on first boot
-firstboot --reconfig
+firstboot --disable
 # SELinux configuration
 selinux --disabled
 # Timezone setup
@@ -35,7 +35,7 @@ reboot
 install
 
 # System services
-services --enabled="sshd,NetworkManager,chronyd,initial-setup"
+services --enabled="sshd,NetworkManager,chronyd"
 # System bootloader configuration
 zerombr
 bootloader --location=mbr --boot-drive=vda --append=" security=none"
@@ -100,12 +100,6 @@ gpgcheck=0
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-RedPesk-Bootstrap
 skip_if_unavailable=False
 EOF
-
-systemctl disable firewalld ||:
-# First workaround disable lvm2-monitor by default
-# If had time need to avoid install at all lvm2 packages
-# by adding a line '-lvm2' in %package section
-systemctl disable lvm2-monitor ||:
 %end
 
 %packages
@@ -142,6 +136,7 @@ kernel-modules-4.14.75+git0+1d76a004d3-r1
 -uboot-images-armv8
 -usb_modeswitch
 -xkeyboard-config
+-lvm2
 
 # specific for seanasim
 agl-service-signal-composer
