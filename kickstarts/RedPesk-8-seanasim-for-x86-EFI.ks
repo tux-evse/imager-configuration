@@ -88,6 +88,7 @@ Wants=NetworkManager-wait-online.service
 ConditionPathExists=/.unconfigured
 
 [Service]
+Environment=XDG_RUNTIME_DIR=/run/user/0
 Type=oneshot
 TimeoutSec=0
 RemainAfterExit=yes
