@@ -142,7 +142,7 @@ chrony
 dracut-config-generic
 extlinux-bootloader
 glibc-langpack-en
-initial-setup
+-initial-setup
 #iw
 rng-tools
 redpesk-repos
