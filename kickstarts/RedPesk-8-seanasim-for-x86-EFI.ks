@@ -103,6 +103,7 @@ WantedBy=graphical.target
 WantedBy=multi-user.target
 EOF
 
+touch /.unconfigured
 systemctl enable rp-setup.service
 %end
 
