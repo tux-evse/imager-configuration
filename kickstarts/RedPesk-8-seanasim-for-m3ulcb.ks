@@ -110,6 +110,7 @@ WantedBy=graphical.target
 WantedBy=multi-user.target
 EOF
 
+touch /.unconfigured
 systemctl enable rp-setup.service
 
 cat << EOF >> /etc/yum.repos.d/redpesk-rcar-m3ulcb.repo
