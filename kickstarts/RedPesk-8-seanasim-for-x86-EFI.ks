@@ -129,11 +129,11 @@ alsa-firmware
 -pulseaudio
 -lvm2
 sox
-#anbox
 electron
-# agl bidning installed via script in kojihub01
-#agl-app-framework-binder
-#agl-app-framework-main
+# AGL
+agl-app-framework-binder
+agl-app-framework-main
+# agl binding are installed via script in kojihub01
 #agl-appli-homescreen-html
 #agl-appli-mixer-html
 #agl-appli-hvac-html
