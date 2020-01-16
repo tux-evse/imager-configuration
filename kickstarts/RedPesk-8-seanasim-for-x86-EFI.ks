@@ -85,6 +85,7 @@ After=plymouth-quit-wait.service
 After=afm-system-daemon.service
 After=NetworkManager-wait-online.service
 Wants=NetworkManager-wait-online.service
+After=nss-lookup.target
 ConditionPathExists=/.unconfigured
 
 [Service]
