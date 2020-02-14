@@ -13,8 +13,9 @@ clearpart --none --initlabel
 reqpart --add-boot
 part pv.01 --grow
 volgroup redpesk-vg0 pv.01
-logvol / --label root --name root --fstype ext4 --vgname redpesk-vg0 --size 7000 --grow
-logvol swap --label swap --name swap --fstype swap --vgname redpesk-vg0 --size 1000
+logvol swap --label swap --name swap --fstype swap --vgname redpesk-vg0 --size 8192
+logvol / --label root --name root --fstype ext4 --vgname redpesk-vg0 --size 16384
+logvol /srv --label srv --name srv --fstype ext4 --vgname redpesk-vg0 --size 1 --grow
 # Root password setup
 rootpw packer
 reboot
