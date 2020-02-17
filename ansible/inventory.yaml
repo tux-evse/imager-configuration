@@ -1,0 +1,14 @@
+all:
+  hosts:
+    redpesk-hub:
+      ansible_user: root
+      ansible_password: packer
+      ansible_port: 22
+      ansible_host: 10.18.127.154
+      fqdn: redpesk-hub01.lorient.iot
+    redpesk-builder:
+      ansible_user: root
+      ansible_password: packer
+      ansible_port: 22
+      ansible_host: 10.18.127.179
+      fqdn: redpesk-builder01.lorient.iot

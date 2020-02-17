@@ -15,15 +15,15 @@ part pv.01 --grow
 volgroup redpesk-vg0 pv.01
 logvol swap --label swap --name swap --fstype swap --vgname redpesk-vg0 --size 8192
 logvol / --label root --name root --fstype ext4 --vgname redpesk-vg0 --size 16384
-logvol /srv --label srv --name srv --fstype ext4 --vgname redpesk-vg0 --size 1 --grow
+logvol /srv --label data --name data --fstype ext4 --vgname redpesk-vg0 --size 1 --grow
 # Root password setup
-rootpw packer
+rootpw --iscrypted $1$r2SoE8WA$/46m21MZhX4/XxJ41p9bB0
 reboot
 install
 
 # Network information
 network  --bootproto=dhcp --device=ens3 --ipv6=auto --activate
-network  --hostname=redpesk-buildhub
+network  --hostname=redpesk-hub
 # Run the Setup Agent on first boot
 firstboot --disable
 # Do not configure the X Window System

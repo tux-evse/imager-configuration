@@ -1,0 +1,158 @@
+---
+- hosts: all
+  vars:
+    # XXX: factor into common section
+    koji_setup_dir: '/tmp/koji-setup/koji-setup'
+  tasks:
+  - name: Get IOTBZH OBS repository GPG Key
+    get_url:
+      url: https://obs2.lorient.iot/projects/redpesk/public_key
+      dest: /etc/pki/rpm-gpg/RPM-GPG-KEY-iotbzh-fedora-30
+      follow: yes
+      headers:
+        Accept: '*/*'
+      validate_certs: no
+  - name: Add repository
+    yum_repository:
+      name: iotbzh_fedora-30
+      description: iotbzh OBS Fedora 30 repository
+      baseurl: http://obs2.lorient.iot/redpesk/Fedora_30/
+      gpgcheck: yes
+      gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-iotbzh-fedora-30
+      enabled: yes
+  - name: Add required bundles for koji deployment scripts
+    dnf:
+      name: bind-utils,wget,git,ssmtp,postgresql-server,policycoreutils-python-utils,firewalld
+      state: present
+    become: true
+    tags:
+     - dnf_install
+  - name: Clone koji-setup repository
+    git:
+      repo: http://git.ovh.iot/redpesk/koji-setup.git
+      dest: /tmp/koji-setup
+      version: provision
+      update: yes
+      force: yes
+    tags:
+     - install_scripts_and_rpms
+
+- hosts: redpesk-hub
+  vars:
+    # XXX: factor into common section
+    hub_packages: |
+      koji,koji-hub,koji-hub-plugins,koji-utils,koji-web,vim,mod_ssl,
+      fedora-messaging,python3-fedora-messaging,rabbitmq-server,
+      python3-xmltodict,rpkg,bash-completion,nfs-utils,
+      koji-builder-crossbuild-plugin,mock-crossbuild-plugin,
+      koji-hub-crossbuild-plugin
+    koji_setup_dir: '/tmp/koji-setup/koji-setup'
+    koji_pki_dir: '/etc/pki/koji'
+    local_builder_username: 'local_builder'
+    local_builder_certs_archive: "{{ koji_pki_dir }}/clients-archives/{{ local_builder_username }}.tar.gz"
+  tasks:
+  - name: Change hostname for Hub to redpesk-hub01
+    hostname:
+      name: redpesk-hub01.lorient.iot
+  - name: Inform dns of the hostname change
+    shell:
+      cmd: dhclient -r && dhclient -H redpesk-hub01.lorient.iot
+  - name: Install required bundles for Koji-hub
+    dnf:
+      name: "{{ hub_packages }}"
+      state: present
+    become: true
+    tags:
+     - dnf_install
+  - name: deploy Koji hub server
+    command:
+      ./deploy-koji.sh
+    become: true
+    args:
+      chdir: "{{ koji_setup_dir }}"
+    tags:
+      - deploy_koji
+    environment:
+      # XXX: move this into a common section
+      KOJI_MASTER_FQDN: "{{ hostvars['redpesk-hub']['fqdn'] }}"
+      KOJI_SLAVE_FQDN: "{{ hostvars['redpesk-builder']['fqdn'] }}"
+  - name: retrieve builder certificates
+    fetch:
+      dest: "vm_certs"
+      src: "/etc/pki/koji/{{ item }}"
+    loop:
+      - "clients-certs/{{ hostvars['redpesk-builder']['fqdn'] }}.pem"
+      - "koji_ca_cert.crt"
+    tags:
+      - fetch_certs
+  - name: generate local builder cert
+    command:
+        "./gencert.sh --user local_builder"
+    become: true
+    args:
+      chdir: "{{ koji_pki_dir }}"
+      creates: "{{ local_builder_certs_archive }}"
+    tags:
+      - gen_local_builder_certs
+  - name: retrieve local builder cert archive
+    fetch:
+      dest: "vm_certs"
+      src: "{{ local_builder_certs_archive}}"
+    tags:
+      - gen_local_builder_certs
+
+- hosts: redpesk-builder
+  vars:
+    builder_packages: |
+      koji-builder,koji,tmpwatch,vim,qemu-user-static,
+      qemu-system-aarch64,yum,imagefactory,imagefactory-plugins,
+      imagefactory-plugins-TinMan,imagefactory-plugins-OVA,pykickstart,
+      python2-kickstart,python3-pyelftools,lorax-lmc-virt,crontabs,
+      bash-completion,nfs-utils
+    koji_setup_dir: '/tmp/koji-setup/koji-setup'
+  tasks:
+  - name: Change hostname for Builder to redpesk-builder01
+    hostname:
+      name: redpesk-builder01.lorient.iot
+  - name: Change partition LABEL from srv to mockbuild
+    command:
+      e2label /dev/redpesk-vg0/data mockbuild
+  - name: Remove /srv mountpoint
+    mount:
+      path: /srv
+      state: absent
+  - name: Add /var/lib/mock mountpoint for the builder
+    mount:
+      path: /var/lib/mock
+      src: LABEL=mockbuild
+      fstype: ext4
+      opts: noatime,defaults
+      state: present
+  - name: install Koji builder packages
+    dnf:
+      name: "{{ builder_packages }}"
+      state: present
+    become: true
+    tags:
+      - install_koji_builder_pkgs
+  - name: deploy koji builder server
+    command:
+      ./deploy-koji-remote-builder.sh
+    environment:
+      KOJI_MASTER_FQDN: "{{ hostvars['redpesk-hub']['fqdn'] }}"
+      KOJI_SLAVE_FQDN: "{{ hostvars['redpesk-builder']['fqdn'] }}"
+    become: true
+    args:
+      chdir: "{{ koji_setup_dir }}"
+    tags:
+      - deploy_koji_remote_builder
+  - name: insert builder certificates
+    copy:
+      src: "vm_certs/redpesk-hub/etc/pki/koji/{{ item }}"
+      dest: "/etc/pki/koji/{{ item }}"
+    loop:
+      - "clients-certs/{{ hostvars['redpesk-builder']['fqdn'] }}.pem"
+      - "koji_ca_cert.crt"
+    become: true
+    tags:
+      - copy_certs
