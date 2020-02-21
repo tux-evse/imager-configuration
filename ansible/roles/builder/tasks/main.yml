@@ -1,0 +1,62 @@
+- name: Change hostname for Builder to "{{ hostvars[inventory_hostname].fqdn }}"
+  hostname:
+    name: "{{ hostvars[inventory_hostname].fqdn }}"
+
+- name: Change partition LABEL from srv to mockbuild
+  command:
+    e2label /dev/redpesk-vg0/data mockbuild
+
+- name: Remove /srv mountpoint
+  mount:
+    path: /srv
+    state: absent
+
+- name: Add /var/lib/mock mountpoint for the builder
+  mount:
+    path: /var/lib/mock
+    src: LABEL=mockbuild
+    fstype: ext4
+    opts: noatime,defaults
+    state: present
+
+- name: install Koji builder packages
+  dnf:
+    name: "{{ builder_packages }}"
+    state: present
+  become: true
+  tags:
+    - install_koji_builder_pkgs
+
+- name: Get the Builder stack number
+  set_fact:
+    stack_n: "{{ inventory_hostname | regex_replace('.*([0-9])[0-9]$', '\\1') }}"
+
+- name: Get the correct hub to connect to
+  set_fact:
+    hubname: "{{ item }}"
+  loop: "{{ groups['hubs'] | default([]) }}"
+  when:  item | regex_search(stack_n+'$')
+
+- name: deploy koji builder server
+  command:
+    ./deploy-koji-remote-builder.sh
+  become: true
+  args:
+    chdir: "{{ koji_setup_dir }}"
+    creates: /builder_deployed
+  environment:
+    KOJI_MASTER_FQDN: "{{ hostvars[hubname].fqdn }}"
+    KOJI_SLAVE_FQDN: "{{ hostvars[inventory_hostname].fqdn }}"
+  tags:
+    - deploy_koji_remote_builder
+
+- name: Insert builder certificates
+  copy:
+    src: "vm_certs/{{ hubname }}/etc/pki/koji/{{ item }}"
+    dest: "/etc/pki/koji/{{ item }}"
+  loop:
+    - "clients-certs/{{ hostvars[inventory_hostname].fqdn }}.pem"
+    - "koji_ca_cert.crt"
+  become: true
+  tags:
+    - copy_certs

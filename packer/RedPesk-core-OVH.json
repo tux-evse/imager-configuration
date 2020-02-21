@@ -11,7 +11,7 @@
       "username": "{{user `username`}}",
       "password": "{{user `password`}}",
 
-      "node": "hypervisor04",
+      "node": "hypervisor01-redpesk-rbx",
       "network_adapters": [
         {
       "model": "virtio",

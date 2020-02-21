@@ -1,14 +1,24 @@
 all:
-  hosts:
-    redpesk-hub:
-      ansible_user: root
-      ansible_password: packer
-      ansible_port: 22
-      ansible_host: 10.18.127.154
-      fqdn: redpesk-hub01.lorient.iot
-    redpesk-builder:
-      ansible_user: root
-      ansible_password: packer
-      ansible_port: 22
-      ansible_host: 10.18.127.179
-      fqdn: redpesk-builder01.lorient.iot
+  children:
+    hubs:
+      hosts:
+        rpk-kjhub-p02:
+          ansible_host: 10.19.0.214
+          fqdn: rpk-kjhub-p02.redpesk.iot
+        rpk-kjhub-p03:
+          ansible_host: 10.19.0.37
+          fqdn: rpk-kjhub03.redpesk.iot
+    builders:
+      hosts:
+        rpk-kjbdr-p21:
+          ansible_host: 10.19.0.26
+          fqdn: rpk-kjbdr-p21.redpesk.iot
+        rpk-kjbdr-p22:
+          ansible_host: 10.19.0.44
+          fqdn: rpk-kjbdr-p21.redpesk.iot
+        rpk-kjbdr-p31:
+          ansible_host: 10.19.0.4
+          fqdn: rpk-kjbdr-p31.redpesk.iot
+        rpk-kjbdr-p32:
+          ansible_host: 10.19.0.80
+          fqdn: rpk-kjbdr-p32.redpesk.iot

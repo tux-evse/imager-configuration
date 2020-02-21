@@ -1,0 +1,35 @@
+- name: Get Iot.Bzh OBS repository GPG Key
+  get_url:
+    url: https://obs2.lorient.iot/projects/redpesk/public_key
+    dest: /etc/pki/rpm-gpg/RPM-GPG-KEY-iotbzh-fedora-30
+    follow: yes
+    headers:
+      Accept: '*/*'
+    validate_certs: no
+
+- name: Add IoT.Bzh OBS repository
+  yum_repository:
+    name: iotbzh_fedora-30
+    description: iotbzh OBS Fedora 30 repository
+    baseurl: http://obs2.lorient.iot/redpesk/Fedora_30/
+    gpgcheck: yes
+    gpgkey: file:///etc/pki/rpm-gpg/RPM-GPG-KEY-iotbzh-fedora-30
+    enabled: yes
+
+- name: Add required bundles for koji deployment scripts
+  dnf:
+    name: bind-utils,wget,git,ssmtp,postgresql-server,policycoreutils-python-utils,firewalld
+    state: present
+  become: true
+  tags:
+    - dnf_install
+
+- name: Clone koji-setup repository
+  git:
+    repo: http://git.ovh.iot/redpesk/koji-setup.git
+    dest: /tmp/koji-setup
+    version: provision
+    update: yes
+    force: yes
+  tags:
+    - install_scripts_and_rpms

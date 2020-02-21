@@ -1,0 +1,9 @@
+hub_packages: |
+  koji,koji-hub,koji-hub-plugins,koji-utils,koji-web,vim,mod_ssl,
+  fedora-messaging,python3-fedora-messaging,rabbitmq-server,
+  python3-xmltodict,rpkg,bash-completion,nfs-utils,
+  koji-builder-crossbuild-plugin,mock-crossbuild-plugin,
+  koji-hub-crossbuild-plugin
+local_builder_username: 'local_builder'
+local_builder_certs_archive: "{{ koji_pki_dir }}/clients-archives/{{ local_builder_username }}.tar.gz"
+kojid_rpm_arches: "x86_64 x86_64--aarch64"
