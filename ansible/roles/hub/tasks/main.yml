@@ -70,3 +70,10 @@
     src: "{{ local_builder_certs_archive}}"
   tags:
     - gen_local_builder_certs
+
+- name: Install cron jobs to be used by keepalived later
+  blockinfile:
+    path: /etc/crontab
+    block: "{{lookup('file', 'koji-directory-cleanup')}}"
+    create: yes
+    state: present
