@@ -2,7 +2,7 @@
 # Keyboard layouts
 keyboard --vckeymap=fr --xlayouts='fr'
 # Root password
-rootpw --plaintext demo
+rootpw --plaintext root
 # set hostname
 network --hostname CES2020-nuc
 # System language
@@ -18,7 +18,8 @@ auth --useshadow --passalgo=sha512
 # Firewall configuration
 firewall --disable
 ignoredisk --only-use=vda
-repo --name="koji-override-0" --baseurl=http://kojihub.lorient.iot/kojifiles/repos/0_RedPesk_HH-build/latest/x86_64/
+repo --name="RedPesk" --baseurl="http://kojihub.lorient.iot/kojifiles/repos-dist/RedPesk-8--RedPesk-8-release/latest/x86_64/" --cost=1 --install
+repo --name="RedPesk-Build" --baseurl="http://kojihub.lorient.iot/kojifiles/repos/RedPesk-8--RedPesk-8-build/latest/x86_64/" --cost=1 --install
 repo --name="koji-override-1" --baseurl=http://fmirrors.lorient.iot/fmirrors/fedora/linux/releases/28/Everything/x86_64/os
 # Use network installation
 #url --url="https://archives.fedoraproject.org/pub/archive/fedora/linux/releases/28/Everything/x86_64/os/"

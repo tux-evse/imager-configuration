@@ -11,8 +11,8 @@ keyboard --vckeymap=fr --xlayouts='fr'
 # Use network installation
 #url --mirrorlist "https://mirrors.fedoraproject.org/mirrorlist?repo=fedora-28&arch=aarch64"
 # Additionnal repositories
-repo --name="RedPesk" --baseurl="http://kojihub.lorient.iot/kojifiles/repos-dist/0_RedPesk_HH-release/latest/x86_64/" --cost=1 --install
-repo --name="RedPesk-Build" --baseurl="http://kojihub.lorient.iot/kojifiles/repos/0_RedPesk_HH-build/latest/x86_64/" --cost=1 --install
+repo --name="RedPesk" --baseurl="http://kojihub.lorient.iot/kojifiles/repos-dist/0_RedPesk_secu_HH-release//latest/x86_64/" --cost=1 --install
+repo --name="RedPesk-Build" --baseurl="http://kojihub.lorient.iot/kojifiles/repos/0_RedPesk_secu_HH-build/latest/x86_64/" --cost=1 --install
 # System authorization information
 auth --useshadow --passalgo=sha512
 # Firewall configuration
@@ -24,7 +24,7 @@ selinux --disabled
 # Timezone setup
 timezone --isUtc Europe/Paris
 # Root password setup
-rootpw Image_is_securized!
+rootpw --plaintext root
 # Do not configure the X Window System
 skipx
 # Reboot the image once installed. ImageFactory look for that!
@@ -106,5 +106,6 @@ redpesk-release-iot
 # AGL
 agl-app-framework-binder
 agl-app-framework-main
+smack-rules
 %end
 

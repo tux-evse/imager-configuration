@@ -11,7 +11,8 @@ keyboard --vckeymap=fr --xlayouts='fr'
 # Use network installation
 #url --mirrorlist "https://mirrors.fedoraproject.org/mirrorlist?repo=fedora-28&arch=aarch64"
 # Additionnal repositories
-repo --name="RedPesk" --baseurl="http://kojihub.lorient.iot/kojifiles/repos-dist/0_RedPesk_HH-release/latest/aarch64/" --cost=1 --install
+repo --name="RedPesk" --baseurl="http://kojihub.lorient.iot/kojifiles/repos-dist/RedPesk-8--RedPesk-8-release/latest/aarch64/" --cost=1 --install
+repo --name="RedPesk-Build" --baseurl="http://kojihub.lorient.iot/kojifiles/repos/RedPesk-8--RedPesk-8-build/latest/aarch64/" --cost=1 --install
 repo --name="m3ulcb-bsp" --baseurl="http://kojihub01.lorient.iot/iotbzh-repositories/m3ulcb-bsp/" --cost=1 --install
 # System authorization information
 auth --useshadow --passalgo=sha512
@@ -24,7 +25,7 @@ selinux --disabled
 # Timezone setup
 timezone --isUtc Europe/Paris
 # Root password setup
-rootpw demo2020
+rootpw --plaintext root
 # set hostname
 network --hostname CES2020-m3ulcb
 # Do not configure the X Window System

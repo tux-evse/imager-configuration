@@ -17,7 +17,7 @@ logvol swap --label swap --name swap --fstype swap --vgname redpesk-vg0 --size 8
 logvol / --label root --name root --fstype ext4 --vgname redpesk-vg0 --size 16384
 logvol /srv --label data --name data --fstype ext4 --vgname redpesk-vg0 --size 1 --grow
 # Root password setup
-rootpw --iscrypted $1$r2SoE8WA$/46m21MZhX4/XxJ41p9bB0
+rootpw  --plaintext root
 reboot
 install
 

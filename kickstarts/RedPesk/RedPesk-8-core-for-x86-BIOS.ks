@@ -11,8 +11,8 @@ keyboard --vckeymap=fr --xlayouts='fr'
 # Use network installation
 #url --mirrorlist "https://mirrors.fedoraproject.org/mirrorlist?repo=fedora-28&arch=aarch64"
 # Additionnal repositories
-repo --name="RedPesk" --baseurl="http://kojihub.lorient.iot/kojifiles/repos-dist/0_RedPesk_HH-release/latest/x86_64/" --cost=1 --install
-repo --name="RedPesk-Build" --baseurl="http://kojihub.lorient.iot/kojifiles/repos/0_RedPesk_HH-build/latest/x86_64/" --cost=1 --install
+repo --name="RedPesk" --baseurl="http://kojihub.lorient.iot/kojifiles/repos-dist/RedPesk-8--RedPesk-8-release/latest/x86_64/" --cost=1 --install
+repo --name="RedPesk-Build" --baseurl="http://kojihub.lorient.iot/kojifiles/repos/RedPesk-8--RedPesk-8-build/latest/x86_64/" --cost=1 --install
 # System authorization information
 auth --useshadow --passalgo=sha512
 # Firewall configuration
@@ -24,7 +24,7 @@ selinux --disabled
 # Timezone setup
 timezone --isUtc Europe/Paris
 # Root password setup
-rootpw Image_is_securized!
+rootpw --plaintext root
 # Do not configure the X Window System
 skipx
 # Reboot the image once installed. ImageFactory look for that!
@@ -39,11 +39,7 @@ zerombr
 bootloader --location=mbr --boot-drive=vda
 # Partition clearing information
 clearpart --none --initlabel
-reqpart --add-boot
-part pv.01 --grow
-volgroup redpesk-vg0 pv.01
-logvol / --label root --name root --fstype ext4 --vgname redpesk-vg0 --size 7000 --grow
-logvol swap --label swap --name swap --fstype swap --vgname redpesk-vg0 --size 1000
+autopart --nolvm
 
 %post
 # work around for poor key import UI in PackageKit
@@ -73,10 +69,8 @@ echo -n "Setting default runlevel to multiuser text mode"
 rm -f /etc/systemd/system/default.target
 ln -s /lib/systemd/system/multi-user.target /etc/systemd/system/default.target
 
-# Install is made using nomodeset flag but we don't need it to use the system.
-# It works alright.
-sed -i -r 's: ?nomodeset ?::' /etc/default/grub
-dracut --force --regenerate-all
+# Add by default the ttyS0 as console device at boot time
+sed -i '/^GRUB_CMDLINE_LINUX/s:"$: console=ttyS0":' /etc/default/grub
 %end
 
 %packages
