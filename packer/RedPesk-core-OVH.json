@@ -33,7 +33,7 @@
       "iso_file": "local:iso/Fedora-Everything-netinst-x86_64-30-1.2.iso",
       "boot_wait": "5s",
       "boot_command": [
-        "<up><tab> ip=dhcp inst.cmdline inst.ks=http://git.ovh.iot/redpesk/imager-configuration/raw/master/kickstarts/RedPesk-Core-hub.ks<enter>"
+        "<up><tab> ip=dhcp inst.cmdline inst.ks=http://git.ovh.iot/redpesk/imager-configuration/raw/master/kickstarts/Infra/RedPesk-Core-hub.ks<enter>"
       ],
 
       "ssh_username": "root",
