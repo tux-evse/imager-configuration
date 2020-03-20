@@ -2,6 +2,14 @@
   hostname:
     name: "{{ hostvars[inventory_hostname].fqdn }}"
 
+- name: Configure hostname in NetworkManager for interface ens18 (seems to always be this name but has to be sure...)
+  shell:
+    cmd: nmcli con modify ens18 ipv4.dhcp-hostname "{{ hostvars[inventory_hostname].fqdn }}" && systemctl restart NetworkManager
+
+- name: Inform dns of the hostname change
+  shell:
+    cmd: dhclient -r && dhclient -H "{{ hostvars[inventory_hostname].fqdn }}"
+
 - name: Change partition LABEL from srv to mockbuild
   command:
     e2label /dev/redpesk-vg0/data mockbuild
