@@ -25,7 +25,7 @@
     src: LABEL=mockbuild
     fstype: ext4
     opts: noatime,defaults
-    state: present
+    state: mounted
 
 - name: install Koji builder packages
   dnf:
