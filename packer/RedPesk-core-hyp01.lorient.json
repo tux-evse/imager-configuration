@@ -1,0 +1,48 @@
+{
+  "variables": {
+    "username": "remote@pve",
+    "password": "Azerty/123#"
+  },
+  "builders": [
+    {
+      "type": "proxmox",
+      "proxmox_url": "https://hypervisor01.lorient.iot:8006/api2/json",
+      "insecure_skip_tls_verify": true,
+      "username": "{{user `username`}}",
+      "password": "{{user `password`}}",
+
+      "node": "rpk-hv03",
+      "network_adapters": [
+        {
+      "model": "virtio",
+      "bridge": "vmbr2"
+        }
+      ],
+      "disks": [
+        {
+      "type": "virtio",
+      "disk_size": "500G",
+      "storage_pool": "ceph_pool_hdd",
+      "storage_pool_type": "lvm-thin",
+      "format": "raw"
+        }
+      ],
+      "memory": "16384",
+      "sockets": "2",
+      "cores": "4",
+      "iso_file": "local:iso/Fedora-Workstation-netinst-x86_64-30-1.2.iso",
+      "boot_wait": "5s",
+      "boot_command": [
+        "<up><tab> ip=dhcp inst.cmdline inst.ks=http://git.ovh.iot/redpesk/imager-configuration/raw/master/kickstarts/Infra/RedPesk-Core-hub.ks<enter>"
+      ],
+
+      "ssh_username": "root",
+      "ssh_password": "root",
+      "ssh_timeout": "15m",
+
+      "unmount_iso": true,
+      "template_name": "RedPesk-Core",
+      "template_description": "RedPesk Koji Hub node runnning under Fedora 30-1.2"
+    }
+  ]
+}
