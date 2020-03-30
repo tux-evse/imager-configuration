@@ -68,3 +68,9 @@
   become: true
   tags:
     - copy_certs
+    - koji_builder
+
+- name: mock site-defaults.cfg
+  template: src=mock/site-defaults.cfg dest=/etc/mock/site-defaults.cfg mode=0644 owner=root group=mock
+  tags:
+    - koji_builder
