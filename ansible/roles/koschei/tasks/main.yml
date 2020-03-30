@@ -1,0 +1,52 @@
+- name: Change hostname for Koschei to "{{ hostvars[inventory_hostname].fqdn }}"
+  hostname:
+    name: "{{ hostvars[inventory_hostname].fqdn }}"
+
+- name: Inform dns of the hostname change
+  shell:
+    cmd: dhclient -r && dhclient -H "{{ hostvars[inventory_hostname].fqdn }}"
+
+- name: Add IoT.Bzh OBS repository for Koschei
+  yum_repository:
+    name: Koschei
+    description: Iot.Bzh OBS repo for koschei stack
+    baseurl: http://obs2.lorient.iot/redpesk-next/Fedora_$releasever/
+    gpgcheck: yes
+    gpgkey: https://obs2.lorient.iot/projects/redpesk-next/public_key
+    enabled: yes
+
+- name: Install required bundles for Koschei
+  dnf:
+    name: "{{ koschei_packages }}"
+    state: present
+  become: true
+  tags:
+    - dnf_install
+
+- name: Enable the Koschei services
+  systemd:
+    name: "{{ item }}"
+    enabled: yes
+    state: started
+  loop: "koschei-polling koschei-scheduler koschei-repo-resolver koschei-build-resolver"
+
+- name: Get the Koji stack number
+  set_fact:
+    stack_n: "{{ inventory_hostname | regex_replace('.*([0-9])[0-9]$', '\\1') }}"
+
+- name: Get the correct hub to connect to
+  set_fact:
+    hubname: "{{ item }}"
+  loop: "{{ groups['hubs'] | default([]) }}"
+  when:  item | regex_search(stack_n+'$')
+
+- name: Insert builder certificates
+  copy:
+    src: "vm_certs/{{ hubname }}/etc/pki/koji/{{ item }}"
+    dest: "/etc/koschei/{{ item }}"
+  loop:
+    - "clients-certs/{{ hostvars[inventory_hostname].fqdn }}.pem"
+    - "koji_ca_cert.crt"
+  become: true
+  tags:
+    - copy_certs
