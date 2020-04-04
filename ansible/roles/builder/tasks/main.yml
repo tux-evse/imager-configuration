@@ -74,3 +74,10 @@
   template: src=mock/site-defaults.cfg dest=/etc/mock/site-defaults.cfg mode=0644 owner=root group=mock
   tags:
     - koji_builder
+
+- name: Start Koji builder service.
+  systemd:
+    state: started
+    enabled: yes
+    daemon_reload: yes
+    name: kojid

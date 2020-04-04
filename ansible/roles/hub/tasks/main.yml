@@ -81,3 +81,9 @@
     block: "{{lookup('file', 'koji-directory-cleanup')}}"
     create: yes
     state: present
+
+- name: Restart Kojihub Web Server.
+  systemd:
+    state: restarted
+    daemon_reload: yes
+    name: httpd
