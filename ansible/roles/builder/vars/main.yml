@@ -1,6 +1,0 @@
-builder_packages: |
-      koji-builder,koji,tmpwatch,vim,qemu-user-static,
-      qemu-system-aarch64,yum,imagefactory,imagefactory-plugins,
-      imagefactory-plugins-TinMan,imagefactory-plugins-OVA,pykickstart,
-      python2-kickstart,python3-pyelftools,lorax-lmc-virt,crontabs,
-      bash-completion,nfs-utils,koji-builder-crossbuild-plugin,mock-crossbuild-plugin

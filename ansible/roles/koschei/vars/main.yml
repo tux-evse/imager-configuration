@@ -1,2 +1,0 @@
-koschei_packages: "koschei-common koschei-backend koschei-admin koschei-frontend postgresql-server"
-kojid_rpm_arches: "x86_64 x86_64--aarch64"
