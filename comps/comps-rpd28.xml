@@ -924,26 +924,48 @@
       <packagereq type="default">sssd-nfs-idmap</packagereq>
     </packagelist>
   </group>
+  <group>
+    <id>AGL</id>
+    <_name>Automotive Grade Linux</_name>
+    <_description>Support for AGL environment</_description>
+    <default>false</default>
+    <packagelist>
+      <packagereq type="mandatory">agl-app-framework-main</packagereq>
+      <packagereq type="mandatory">agl-app-framework-binder</packagereq>
+      <packagereq type="mandatory">cynagoauth</packagereq>
+      <packagereq type="mandatory">cynara</packagereq>
+      <packagereq type="mandatory">security-manager</packagereq>
+      <packagereq type="mandatory">nss-localuser</packagereq>
+    </packagelist>
+  </group>
+  <group>
+    <id>AGL-Devel</id>
+    <_name>AGL Development</_name>
+    <_description>Development packages for AGL environment</_description>
+    <default>false</default>
+    <packagelist>
+      <packagereq type="mandatory">cmake-apps-module</packagereq>
+      <packagereq type="mandatory">afb-helpers</packagereq>
+      <packagereq type="mandatory">appcontroller</packagereq>
+    </packagelist>
+  </group>
+  <group>
+    <id>AGL-4A</id>
+    <_name>AGL 4A</_name>
+    <_description>Support for AGL 4A Audio environment</_description>
+    <default>false</default>
+    <packagelist>
+      <packagereq type="mandatory">4a-redpesk-audio-service</packagereq>
+      <packagereq type="mandatory">4a-tools</packagereq>
+      <packagereq type="mandatory">4a-hal</packagereq>
+      <packagereq type="mandatory">4a-highlevel</packagereq>
+      <packagereq type="mandatory">4a-alsacore</packagereq>
+      <packagereq type="mandatory">4a-mixer</packagereq>
+    </packagelist>
+  </group>
   <!--=========================================================================
-<<<<<<< Updated upstream
                        	  ENVIRONMENT SUBPART !!!!
-=======
-                       	  ENVIRONMENT SUBPART !!!! 
->>>>>>> Stashed changes
   ==========================================================================-->
-  <environment>
-    <id>custom-environment</id>
-    <_name>Fedora Custom Operating System</_name>
-    <_description>Basic building block for a custom Fedora system.</_description>
-    <display_order>1</display_order>
-    <grouplist>
-      <groupid>core</groupid>
-    </grouplist>
-    <optionlist>
-      <groupid>standard</groupid>
-      <groupid>guest-agents</groupid>
-    </optionlist>
-  </environment>
   <environment>
     <id>minimal-environment</id>
     <_name>Minimal Install</_name>
@@ -958,6 +980,19 @@
     </optionlist>
   </environment>
   <environment>
+    <id>AGL-environment</id>
+    <_name>AGL environment</_name>
+    <_description>Automotive Grade Linux environment.</_description>
+    <display_order>2</display_order>
+    <grouplist>
+      <groupid>AGL</groupid>
+    </grouplist>
+    <optionlist>
+      <groupid>AGL-4A</groupid>
+      <groupid>AGL-Devel</groupid>
+    </optionlist>
+  </environment>
+  <environment>
     <!-- Intended only for the Fedora Server product; other products will not
          show this because they don’t include the redpesk-release-server
          package.  Please keep this mostly in sync with
@@ -969,7 +1004,7 @@
          or something else to differentiate from
          infrastructure-server-environment. -->
     <_description>An integrated, easier to manage server.</_description>
-    <display_order>2</display_order>
+    <display_order>3</display_order>
     <grouplist>
       <groupid>server-product</groupid>
       <groupid>standard</groupid>
@@ -988,6 +1023,17 @@
   <!--=========================================================================
                        	  CATEGEORY SUBPART !!!!
   ==========================================================================-->
+  <category>
+    <id>AGL</id>
+    <_name>AGL</_name>
+    <_description>Software used for running AGL framework</_description>
+    <display_order>90</display_order>
+    <grouplist>
+      <groupid>AGL</groupid>
+      <groupid>AGL-4A</groupid>
+      <groupid>AGL-Devel</groupid>
+    </grouplist>
+  </category>
   <category>
     <id>servers</id>
     <_name>Servers</_name>

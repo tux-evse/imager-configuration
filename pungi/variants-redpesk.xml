@@ -7,6 +7,24 @@
             <arch>x86_64</arch>
         </arches>
     </variant>
+    <variant id="AGL" name="AGL" type="variant">
+        <arches>
+            <arch>aarch64</arch>
+            <arch>x86_64</arch>
+        </arches>
+        <groups>
+            <group default="true">guest-agents</group>
+            <group default="true">standard</group>
+            <group default="true">core</group>
+            <group default="true">AGL</group>
+            <group default="true">AGL-4A</group>
+            <group default="true">AGL-Devel</group>
+        </groups>
+        <environments>
+          <environment display_order="2">AGL-environment</environment>
+          <environment display_order="99">minimal-environment</environment>
+        </environments>
+    </variant>
     <variant id="Server" name="Server" type="variant">
         <arches>
             <arch>aarch64</arch>
