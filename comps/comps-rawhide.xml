@@ -967,25 +967,15 @@
                        	  ENVIRONMENT SUBPART !!!!
   ==========================================================================-->
   <environment>
-    <id>minimal-environment</id>
-    <_name>Minimal Install</_name>
-    <_description>Basic functionality.</_description>
-    <display_order>1</display_order>
-    <grouplist>
-      <groupid>core</groupid>
-    </grouplist>
-    <optionlist>
-      <groupid>standard</groupid>
-      <groupid>guest-agents</groupid>
-    </optionlist>
-  </environment>
-  <environment>
     <id>AGL-environment</id>
     <_name>AGL environment</_name>
     <_description>Automotive Grade Linux environment.</_description>
-    <display_order>2</display_order>
+    <display_order>1</display_order>
     <grouplist>
+      <groupid>core</groupid>
       <groupid>AGL</groupid>
+      <groupid>standard</groupid>
+      <groupid>guest-agents</groupid>
     </grouplist>
     <optionlist>
       <groupid>AGL-4A</groupid>
@@ -1004,7 +994,7 @@
          or something else to differentiate from
          infrastructure-server-environment. -->
     <_description>An integrated, easier to manage server.</_description>
-    <display_order>3</display_order>
+    <display_order>2</display_order>
     <grouplist>
       <groupid>server-product</groupid>
       <groupid>standard</groupid>
