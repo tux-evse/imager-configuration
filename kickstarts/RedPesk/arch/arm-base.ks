@@ -1,4 +1,8 @@
-# Additional repositories
+
+
+# Disabling bootloader for ARM images
+bootloader --location=none --disabled
+
 
 %post --erroronfail --log /tmp/post-arch.log
 # Because memory is scarce resource in most arm systems we are differing from the Fedora
@@ -9,6 +13,11 @@ systemctl mask tmp.mount
 
 
 %packages
-@arm-tools
 -extlinux-bootloader
+-fedora-arm-installer
+-grub2-common
+-grub2-tools
+-grub2-tools-minimal
+-plymouth
+-shim*
 %end

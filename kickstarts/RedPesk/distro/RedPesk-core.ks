@@ -29,11 +29,6 @@ install
 
 # System services
 services --enabled="sshd,NetworkManager,chronyd"
-# Partioning
-autopart --nolvm
-zerombr
-# Partition clearing information
-clearpart --none --initlabel
 
 %post --erroronfail --log /tmp/post-distro.log
 echo "Packages within this disk image"
@@ -59,7 +54,6 @@ echo .
 
 %packages
 @core
-@hardware-support
 NetworkManager-wifi
 chkconfig
 chrony
@@ -78,6 +72,8 @@ wget
 -ipw*
 -iwl*
 -lvm2
+-selinux-policy
+-selinux-policy-targeted
 -trousers
 -uboot-images-armv8
 -usb_modeswitch

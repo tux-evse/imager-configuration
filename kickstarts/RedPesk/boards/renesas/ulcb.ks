@@ -1,7 +1,5 @@
 %include ../../arch/arm-base.ks
-
-# System bootloader configuration
-bootloader --append="console=ttyS0" --location=mbr --boot-drive=vda
+%include ../../arch/arm-boot-ext4.ks
 
 
 %post
@@ -14,6 +12,7 @@ dracut --kver $(find /boot -name Image*yocto* | sed 's:^.*Image-::')
 %packages
 kernel-dev
 kernel-devicetree
+kernel-modules
 -uboot-images-armv7
 -uboot-tools
 %end
