@@ -967,6 +967,19 @@
                        	  ENVIRONMENT SUBPART !!!!
   ==========================================================================-->
   <environment>
+    <id>custom-environment</id>
+    <_name>Fedora Custom Operating System</_name>
+    <_description>Basic building block for a custom Fedora system.</_description>
+    <display_order>1</display_order>
+    <grouplist>
+      <groupid>core</groupid>
+    </grouplist>
+    <optionlist>
+      <groupid>standard</groupid>
+      <groupid>guest-agents</groupid>
+    </optionlist>
+  </environment>
+  <environment>
     <id>minimal-environment</id>
     <_name>Minimal Install</_name>
     <_description>Basic functionality.</_description>
