@@ -42,7 +42,6 @@
             <group default="true">container-management</group>
             <group default="true">domain-client</group>
             <group default="true">server-hardware-support</group>
-            <group default="true">arm-tools</group>
             <!-- Things needed for installation -->
             <group default="true">anaconda-tools</group>
             <group default="true">platform-vmware</group>
