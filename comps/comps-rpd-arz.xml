@@ -919,7 +919,7 @@
     <_description>Development packages for AGL environment</_description>
     <default>false</default>
     <packagelist>
-      <packagereq type="mandatory">afb-cmake-modules </packagereq>
+      <packagereq type="mandatory">afb-cmake-modules</packagereq>
       <packagereq type="mandatory">afb-libhelpers</packagereq>
       <packagereq type="mandatory">afb-libcontroller</packagereq>
     </packagelist>
