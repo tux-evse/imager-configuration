@@ -905,7 +905,7 @@
     <_description>Support for AGL environment</_description>
     <default>false</default>
     <packagelist>
-      <packagereq type="mandatory">afb-binding </packagereq>
+      <packagereq type="mandatory">afb-binding</packagereq>
       <packagereq type="mandatory">afb-binder</packagereq>
       <packagereq type="mandatory">sec-cynagoauth</packagereq>
       <packagereq type="mandatory">sec-cynagora</packagereq>
