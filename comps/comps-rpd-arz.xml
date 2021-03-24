@@ -430,6 +430,14 @@
     <uservisible>true</uservisible>
     <packagelist>
       <packagereq type="mandatory">redhat-rpm-config</packagereq>
+      <packagereq type="mandatory">cross-profile-setup-sdk-aarch64</packagereq>
+      <packagereq type="mandatory">gcc-aarch64-linux-gnu</packagereq>
+      <packagereq type="mandatory">gcc-c++-aarch64-linux-gnu</packagereq>
+      <packagereq type="mandatory">mock-crossbuild-plugin</packagereq>
+      <packagereq type="mandatory">qemu-user-static</packagereq>
+      <packagereq type="mandatory">qemu-system-aarch64</packagereq>
+      <packagereq type="mandatory">redpesk-utils</packagereq>
+      <packagereq type="mandatory">iotpkg</packagereq>
       <packagereq type="mandatory">rpm-build</packagereq>
       <packagereq type="default">koji</packagereq>
       <packagereq type="default">mock</packagereq>
@@ -920,6 +928,7 @@
     <default>false</default>
     <packagelist>
       <packagereq type="mandatory">afb-cmake-modules</packagereq>
+      <packagereq type="mandatory">afm-rpm-macros</packagereq>
       <packagereq type="mandatory">afb-libhelpers</packagereq>
       <packagereq type="mandatory">afb-libcontroller</packagereq>
     </packagelist>
