@@ -211,31 +211,6 @@
       <packagereq type="mandatory">xz</packagereq>
     </packagelist>
   </group>
-  <group>
-    <id>arm-tools</id>
-    <_name>ARM Tools</_name>
-    <_description>Tools for working with arm systems</_description>
-    <default>false</default>
-    <uservisible>false</uservisible>
-    <packagelist>
-      <packagereq>arm-image-installer</packagereq>
-      <packagereq>cloud-utils-growpart</packagereq>
-      <packagereq>uboot-images-armv7</packagereq>
-      <packagereq>uboot-images-armv8</packagereq>
-      <packagereq>zram</packagereq>
-    </packagelist>
-  </group>
-  <group>
-    <id>x86-baremetal-tools</id>
-    <_name>x86 Baremetal Tools</_name>
-    <_description>Tools for working with baremetal x86 systems</_description>
-    <default>false</default>
-    <uservisible>false</uservisible>
-    <packagelist>
-      <packagereq>memtest86+</packagereq>
-      <packagereq>syslinux</packagereq>
-    </packagelist>
-  </group>
   <!--
     Note: The critical-path-* groups are used to identify the packages
     that are critical to the health of the distro. For details see:
@@ -455,6 +430,15 @@
     <uservisible>true</uservisible>
     <packagelist>
       <packagereq type="mandatory">redhat-rpm-config</packagereq>
+      <packagereq type="mandatory">cross-profile-setup-sdk-aarch64</packagereq>
+      <packagereq type="mandatory">gcc-aarch64-linux-gnu</packagereq>
+      <packagereq type="mandatory">gcc-c++-aarch64-linux-gnu</packagereq>
+      <packagereq type="mandatory">mock-crossbuild-plugin</packagereq>
+      <packagereq type="mandatory">qemu-user-static</packagereq>
+      <packagereq type="mandatory">qemu-system-aarch64</packagereq>
+      <packagereq type="mandatory">redpesk-utils</packagereq>
+      <packagereq type="mandatory">iotpkg</packagereq>
+      <packagereq type="mandatory">git-lfs</packagereq>
       <packagereq type="mandatory">rpm-build</packagereq>
       <packagereq type="default">koji</packagereq>
       <packagereq type="default">mock</packagereq>
@@ -930,11 +914,11 @@
     <_description>Support for AGL environment</_description>
     <default>false</default>
     <packagelist>
-      <packagereq type="mandatory">agl-app-framework-main</packagereq>
-      <packagereq type="mandatory">agl-app-framework-binder</packagereq>
-      <packagereq type="mandatory">cynagoauth</packagereq>
-      <packagereq type="mandatory">cynara</packagereq>
-      <packagereq type="mandatory">security-manager</packagereq>
+      <packagereq type="mandatory">afb-binding</packagereq>
+      <packagereq type="mandatory">afb-binder</packagereq>
+      <packagereq type="mandatory">sec-cynagoauth</packagereq>
+      <packagereq type="mandatory">sec-cynagora</packagereq>
+      <packagereq type="mandatory">sec-lsm-manager</packagereq>
       <packagereq type="mandatory">nss-localuser</packagereq>
     </packagelist>
   </group>
@@ -944,9 +928,10 @@
     <_description>Development packages for AGL environment</_description>
     <default>false</default>
     <packagelist>
-      <packagereq type="mandatory">cmake-apps-module</packagereq>
-      <packagereq type="mandatory">afb-helpers</packagereq>
-      <packagereq type="mandatory">appcontroller</packagereq>
+      <packagereq type="mandatory">afb-cmake-modules</packagereq>
+      <packagereq type="mandatory">afm-rpm-macros</packagereq>
+      <packagereq type="mandatory">afb-libhelpers</packagereq>
+      <packagereq type="mandatory">afb-libcontroller</packagereq>
     </packagelist>
   </group>
   <group>
@@ -967,38 +952,15 @@
                        	  ENVIRONMENT SUBPART !!!!
   ==========================================================================-->
   <environment>
-    <id>custom-environment</id>
-    <_name>Fedora Custom Operating System</_name>
-    <_description>Basic building block for a custom Fedora system.</_description>
-    <display_order>1</display_order>
-    <grouplist>
-      <groupid>core</groupid>
-    </grouplist>
-    <optionlist>
-      <groupid>standard</groupid>
-      <groupid>guest-agents</groupid>
-    </optionlist>
-  </environment>
-  <environment>
-    <id>minimal-environment</id>
-    <_name>Minimal Install</_name>
-    <_description>Basic functionality.</_description>
-    <display_order>1</display_order>
-    <grouplist>
-      <groupid>core</groupid>
-    </grouplist>
-    <optionlist>
-      <groupid>standard</groupid>
-      <groupid>guest-agents</groupid>
-    </optionlist>
-  </environment>
-  <environment>
     <id>AGL-environment</id>
     <_name>AGL environment</_name>
     <_description>Automotive Grade Linux environment.</_description>
-    <display_order>2</display_order>
+    <display_order>1</display_order>
     <grouplist>
+      <groupid>core</groupid>
       <groupid>AGL</groupid>
+      <groupid>standard</groupid>
+      <groupid>guest-agents</groupid>
     </grouplist>
     <optionlist>
       <groupid>AGL-4A</groupid>
@@ -1017,7 +979,7 @@
          or something else to differentiate from
          infrastructure-server-environment. -->
     <_description>An integrated, easier to manage server.</_description>
-    <display_order>3</display_order>
+    <display_order>2</display_order>
     <grouplist>
       <groupid>server-product</groupid>
       <groupid>standard</groupid>
