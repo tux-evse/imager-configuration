@@ -438,6 +438,7 @@
       <packagereq type="mandatory">qemu-system-aarch64</packagereq>
       <packagereq type="mandatory">redpesk-utils</packagereq>
       <packagereq type="mandatory">iotpkg</packagereq>
+      <packagereq type="mandatory">git-lfs</packagereq>
       <packagereq type="mandatory">rpm-build</packagereq>
       <packagereq type="default">koji</packagereq>
       <packagereq type="default">mock</packagereq>
