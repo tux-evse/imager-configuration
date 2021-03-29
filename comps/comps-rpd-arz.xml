@@ -436,6 +436,7 @@
       <packagereq type="mandatory">mock-crossbuild-plugin</packagereq>
       <packagereq type="mandatory">qemu-user-static</packagereq>
       <packagereq type="mandatory">qemu-system-aarch64</packagereq>
+      <packagereq type="mandatory">python-cffi</packagereq>
       <packagereq type="mandatory">redpesk-utils</packagereq>
       <packagereq type="mandatory">iotpkg</packagereq>
       <packagereq type="mandatory">git-lfs</packagereq>
