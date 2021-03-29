@@ -922,6 +922,7 @@
       <packagereq type="mandatory">sec-cynagoauth</packagereq>
       <packagereq type="mandatory">sec-cynagora</packagereq>
       <packagereq type="mandatory">sec-lsm-manager</packagereq>
+      <packagereq type="mandatory">sec-lsm-manager-smack</packagereq>
       <packagereq type="mandatory">nss-localuser</packagereq>
     </packagelist>
   </group>
