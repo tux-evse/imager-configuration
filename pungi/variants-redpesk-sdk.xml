@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE variants PUBLIC "-//IoT.BZH.//DTD Variants info//EN" "variants2012.dtd">
+<variants>
+    <variant id="SDK" name="SDK" type="variant">
+        <arches>
+            <arch>x86_64</arch>
+        </arches>
+    </variant>
+</variants>

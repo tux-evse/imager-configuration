@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE comps PUBLIC "-//Red Hat, Inc.//DTD Comps info//EN" "comps.dtd">
+<comps>
+  <!--=========================================================================
+                       	  GROUPS SUBPART !!!!
+  ==========================================================================-->
+  <group>
+    <id>redpesk-core</id>
+    <_name>Redpesk-Core</_name>
+    <_description>Redpesk core software packages: security, appfw...</_description>
+    <default>false</default>
+    <uservisible>true</uservisible>
+    <packagelist>
+      <packagereq type="mandatory">afb-binder</packagereq>
+      <packagereq type="mandatory">afb-binding</packagereq>
+      <packagereq type="mandatory">afb-client</packagereq>
+      <packagereq type="mandatory">afb-cmake-modules</packagereq>
+      <packagereq type="mandatory">afb-idl</packagereq>
+      <packagereq type="mandatory">afb-libafb</packagereq>
+      <packagereq type="optional">afb-libcontroller</packagereq>
+      <packagereq type="optional">afb-libhelpers</packagereq>
+      <packagereq type="optional">afb-test</packagereq>
+      <packagereq type="mandatory">afm-rpm-macros</packagereq>
+      <packagereq type="mandatory">libmicrohttpd</packagereq>
+      <packagereq type="mandatory">sec-cynagora</packagereq>
+    </packagelist>
+  </group>
+  <group>
+    <id>redpesk-common</id>
+    <_name>Redpesk-Common</_name>
+    <_description>Redpesk common components, not part of Redpesk Core.</_description>
+    <default>false</default>
+    <uservisible>true</uservisible>
+    <packagelist>
+      <packagereq type="mandatory">afb-libcontroller</packagereq>
+      <packagereq type="mandatory">canbus-binding</packagereq>
+      <packagereq type="mandatory">canbus-generator</packagereq>
+      <packagereq type="mandatory">canbus-plugins-community</packagereq>
+      <packagereq type="mandatory">canbus-plugins-redpesk</packagereq>
+      <packagereq type="mandatory">cloud-publication-binding</packagereq>
+      <packagereq type="mandatory">gps-binding</packagereq>
+      <packagereq type="mandatory">redis-libtsdb</packagereq>
+      <packagereq type="mandatory">redis-tsdb-binding</packagereq>
+      <packagereq type="mandatory">signal-composer-binding</packagereq>
+      <packagereq type="mandatory">spawn-binding</packagereq>
+    </packagelist>
+  </group>
+</comps>
