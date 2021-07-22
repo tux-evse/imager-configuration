@@ -6,8 +6,8 @@
   ==========================================================================-->
   <group>
     <id>redpesk-core</id>
-    <_name>Redpesk-Core</_name>
-    <_description>Redpesk core software packages: security, appfw...</_description>
+    <name>Redpesk-Core</name>
+    <description>Redpesk core software packages: security, appfw...</description>
     <default>false</default>
     <uservisible>true</uservisible>
     <packagelist>
@@ -27,8 +27,8 @@
   </group>
   <group>
     <id>redpesk-common</id>
-    <_name>Redpesk-Common</_name>
-    <_description>Redpesk common components, not part of Redpesk Core.</_description>
+    <name>Redpesk-Common</name>
+    <description>Redpesk common components, not part of Redpesk Core.</description>
     <default>false</default>
     <uservisible>true</uservisible>
     <packagelist>
@@ -43,6 +43,79 @@
       <packagereq type="mandatory">redis-tsdb-binding</packagereq>
       <packagereq type="mandatory">signal-composer-binding</packagereq>
       <packagereq type="mandatory">spawn-binding</packagereq>
+    </packagelist>
+  </group>
+  <group>
+    <id>redpesk-factory</id>
+    <name>Redpesk-factory</name>
+    <description>Redpesk factory components.</description>
+    <default>false</default>
+    <uservisible>true</uservisible>
+    <packagelist>
+      <packagereq type="mandatory">cookies-events-manager</packagereq>
+      <packagereq type="mandatory">dexidp</packagereq>
+      <packagereq type="mandatory">dexidp-redpesk-infra</packagereq>
+      <packagereq type="mandatory">gitpkgd</packagereq>
+      <packagereq type="mandatory">gitpkgd-test</packagereq>
+      <packagereq type="mandatory">golang</packagereq>
+      <packagereq type="mandatory">golang-bin</packagereq>
+      <packagereq type="mandatory">golang-docs</packagereq>
+      <packagereq type="mandatory">golang-misc</packagereq>
+      <packagereq type="mandatory">golang-packaging-</packagereq>
+      <packagereq type="mandatory">golang-race</packagereq>
+      <packagereq type="mandatory">golang-shared</packagereq>
+      <packagereq type="mandatory">golang-src</packagereq>
+      <packagereq type="mandatory">golang-tests</packagereq>
+      <packagereq type="mandatory">imagefactory-plugins</packagereq>
+      <packagereq type="mandatory">imagefactory-plugins-Docker</packagereq>
+      <packagereq type="mandatory">imagefactory-plugins-GCE</packagereq>
+      <packagereq type="mandatory">imagefactory-plugins-HyperV</packagereq>
+      <packagereq type="mandatory">imagefactory-plugins-IndirectionCloud</packagereq>
+      <packagereq type="mandatory">imagefactory-plugins-OVA</packagereq>
+      <packagereq type="mandatory">imagefactory-plugins-RHEVM</packagereq>
+      <packagereq type="mandatory">imagefactory-plugins-TinMan</packagereq>
+      <packagereq type="mandatory">imagefactory-plugins-ovfcommon</packagereq>
+      <packagereq type="mandatory">imagefactory-plugins-vSphere</packagereq>
+      <packagereq type="mandatory">iotpkg</packagereq>
+      <packagereq type="mandatory">iotpkg-stage</packagereq>
+      <packagereq type="mandatory">kofishop</packagereq>
+      <packagereq type="mandatory">kofishop-cli</packagereq>
+      <packagereq type="mandatory">kofishop-test</packagereq>
+      <packagereq type="mandatory">koji-builder-crossbuild-plugin</packagereq>
+      <packagereq type="mandatory">koji-crossbuild-commons</packagereq>
+      <packagereq type="mandatory">koji-hub-crossbuild-plugin</packagereq>
+      <packagereq type="mandatory">koji-utils</packagereq>
+      <packagereq type="mandatory">koschei-admin</packagereq>
+      <packagereq type="mandatory">koschei-backend</packagereq>
+      <packagereq type="mandatory">koschei-backend-copr</packagereq>
+      <packagereq type="mandatory">koschei-backend-fedora</packagereq>
+      <packagereq type="mandatory">koschei-common</packagereq>
+      <packagereq type="mandatory">koschei-common-copr</packagereq>
+      <packagereq type="mandatory">koschei-common-fedora</packagereq>
+      <packagereq type="mandatory">koschei-frontend</packagereq>
+      <packagereq type="mandatory">koschei-frontend-copr</packagereq>
+      <packagereq type="mandatory">koschei-frontend-fedora</packagereq>
+      <packagereq type="mandatory">local-npm-registry</packagereq>
+      <packagereq type="mandatory">mock-crossbuild-plugin</packagereq>
+      <packagereq type="mandatory">nodejs-14-</packagereq>
+      <packagereq type="mandatory">nodejs-package-config-20180530</packagereq>
+      <packagereq type="mandatory">oz</packagereq>
+      <packagereq type="mandatory">pkg-repo-publisher</packagereq>
+      <packagereq type="mandatory">pungi</packagereq>
+      <packagereq type="mandatory">pungi-utils</packagereq>
+      <packagereq type="mandatory">python3-aioamqp</packagereq>
+      <packagereq type="mandatory">python3-engineio</packagereq>
+      <packagereq type="mandatory">python3-pamqp</packagereq>
+      <packagereq type="mandatory">python3-pungi</packagereq>
+      <packagereq type="mandatory">python3-socketio</packagereq>
+      <packagereq type="mandatory">python3-t</packagereq>
+      <packagereq type="mandatory">python3-templated-dictionary</packagereq>
+      <packagereq type="mandatory">red-tuna-magic</packagereq>
+      <packagereq type="mandatory">red-tuna-magic-test</packagereq>
+      <packagereq type="mandatory">redpesk-utils</packagereq>
+      <packagereq type="mandatory">redtunamagic-ship</packagereq>
+      <packagereq type="mandatory">redtunamagic-ship-test</packagereq>
+      <packagereq type="mandatory">rp-webserver</packagereq>
     </packagelist>
   </group>
 </comps>
