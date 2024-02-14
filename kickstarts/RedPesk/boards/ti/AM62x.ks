@@ -9,6 +9,9 @@ cp /var/lib/uboot_firmware/tiboot3.bin /firmware
 cp /var/lib/uboot_firmware/tispl.bin /firmware
 cp /var/lib/uboot_firmware/u-boot.img /firmware
 
+BINDING="evse-display-manager-binder"
+echo "BINDING=\"\$BINDING ${BINDING}\"" >> /tmp/binding-list
+
 %end
 
 

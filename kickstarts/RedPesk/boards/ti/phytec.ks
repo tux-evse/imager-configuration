@@ -19,9 +19,6 @@ cockpit-storaged
 cockpit-tests
 cockpit-pcp
 
-#Add evse demo
-evse-display-manager-binder
-
 #Add demo configuration package
 tux-evse-board-configuration
 
